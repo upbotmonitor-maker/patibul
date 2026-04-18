@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>🐱 PatiBul Trabzon V2 FİNAL</title>
+  <title>🐱 PatiBul Trabzon V2.1</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -40,6 +40,11 @@
       display: inline-block;
       text-align: center;
       font-size: 0.95rem;
+      transition: transform 0.1s, background 0.2s;
+    }
+    button:hover, .btn:hover {
+      background: #d35400;
+      transform: scale(1.02);
     }
     button.secondary {
       background: #f39c12;
@@ -114,7 +119,7 @@
       flex-wrap: wrap;
       margin-top: 12px;
     }
-    .hidden { display: none; }
+    .hidden { display: none !important; }
     .tema-btn {
       background: none;
       border: none;
@@ -195,11 +200,68 @@
       background: #3a3f55;
       color: white;
     }
+    /* Süper Acil Rozeti */
+    .super-acil-badge {
+      background: #ff3b3b;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-left: 8px;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 10px #ff3b3b;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .verified-badge {
+      background: #2ecc71;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    .foto-galeri {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .foto-galeri img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 2px solid #f39c12;
+      flex-shrink: 0;
+    }
+    .harita-acil {
+      animation: pulse 1.5s infinite;
+      background: #ff3b3b !important;
+      border-color: #cc0000 !important;
+    }
+    .diger-ilanlar {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed #e67e22;
+      font-size: 0.9rem;
+    }
+    .diger-ilanlar a {
+      color: #e67e22;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body class="light">
   <div class="header">
-    <h1>🐾 PatiBul Trabzon V2</h1>
+    <h1>🐾 PatiBul Trabzon V2.1</h1>
     <button class="tema-btn" id="temaToggle">🌙</button>
   </div>
 
@@ -211,10 +273,15 @@
   </div>
   <div id="istatistikAlani" style="margin-bottom:16px;font-weight:bold;"></div>
 
+  <!-- İlan Formu -->
   <div id="formKonteyner" class="card hidden">
     <h2>📝 Yeni Kayıp İlanı</h2>
     <form id="ilanForm">
-      <div class="form-group"><label>🐱 Kedi Fotoğrafı (Zorunlu, JPG/PNG):</label><input type="file" id="fotoInput" accept="image/jpeg,image/png" capture="environment" required></div>
+      <div class="form-group">
+        <label>🐱 Kedi Fotoğrafları (1-3 adet):</label>
+        <input type="file" id="fotoInput" accept="image/jpeg,image/png" multiple capture="environment">
+        <small>Ctrl veya Shift ile birden fazla seçebilirsiniz.</small>
+      </div>
       <div class="form-group"><label>😺 Kedi Adı:</label><input type="text" id="kediAdi" required></div>
       <div class="form-group"><label>🏘️ Mahalle:</label><input type="text" id="mahalle" required></div>
       <div class="form-group"><label>📧 İletişim Mail:</label><input type="email" id="mail" required></div>
@@ -229,13 +296,16 @@
     </form>
   </div>
 
+  <!-- İstatistik Panelleri -->
   <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
     <div id="sonBulunanlarBox" class="card" style="flex:1; min-width:200px;"></div>
     <div id="mutluSonlarBox" class="card" style="flex:1; min-width:200px;"></div>
   </div>
 
+  <!-- İlan Listesi -->
   <div id="ilanListesi" class="grid"></div>
 
+  <!-- Admin Paneli -->
   <div id="adminPanel" class="card hidden">
     <h3>🛠️ Admin Paneli</h3>
     <input type="password" id="adminSifre" placeholder="Admin Şifresi">
@@ -243,7 +313,7 @@
     <div id="adminIcerik" class="hidden"></div>
   </div>
 
-  <!-- HAREKETLİ POLİS KIZ MODAL -->
+  <!-- Polis Kız Modal -->
   <div id="sikayetModal" class="modal">
     <div class="modal-content">
       <div class="polis-animasyon">
@@ -267,7 +337,7 @@
   </div>
 
   <script>
-    // Tema
+    // ========== TEMA ==========
     const temaToggle = document.getElementById('temaToggle');
     function temaUygula() {
       const kayitli = localStorage.getItem('tema') || 'light';
@@ -281,6 +351,7 @@
       temaUygula();
     });
 
+    // ========== İLÇELER ==========
     const ilceler = ["Ortahisar","Akçaabat","Araklı","Arsin","Beşikdüzü","Çarşıbaşı","Çaykara","Dernekpazarı","Düzköy","Hayrat","Köprübaşı","Maçka","Of","Şalpazarı","Sürmene","Tonya","Vakfıkebir","Yomra"];
     const ilceSelect = document.getElementById('ilceSelect');
     const ilceFilter = document.getElementById('ilceFilter');
@@ -293,6 +364,7 @@
     let ilceSayac = {};
     let captchaSorusu = null;
 
+    // ========== VERİ ÇEKME ==========
     async function verileriYukle() {
       try {
         const res = await fetch('/ilanlar');
@@ -332,6 +404,7 @@
       box.innerHTML = '<strong>📖 Mutlu Sonlar</strong><br>' + liste.map(i => `🎉 ${i.kediAdi}: "${i.bulunduHikaye?.substring(0,30)}..."`).join('<br>');
     }
 
+    // ========== İLAN KARTLARI ==========
     function ilanlariGoster() {
       const container = document.getElementById('ilanListesi');
       const seciliIlce = ilceFilter.value;
@@ -340,27 +413,53 @@
 
       container.innerHTML = filtrelenmis.map(i => {
         const gun = Math.floor((Date.now() - i.tarih) / (1000*60*60*24));
-        const gunText = gun === 0 ? 'Bugün' : `${gun} gün önce`;
+        const saat = Math.floor((Date.now() - i.tarih) / (1000*60*60));
+        const gunText = gun === 0 ? (saat === 0 ? 'Az önce' : `${saat} saat önce`) : `${gun} gün önce`;
+        const fotoDogrulandi = i.fotolar && i.fotolar.length >= 3;
+        const haritaLink = `https://www.google.com/maps/search/${encodeURIComponent(i.mahalle + ' ' + i.ilce + ' Trabzon')}`;
+
+        // Aynı kullanıcının diğer ilanları
+        const digerIlanlar = tumIlanlar.filter(x => x.mail === i.mail && x.id !== i.id && !x.bulundu && !x.silindi);
+
         return `
           <div class="card ${i.acil ? 'acil' : ''}">
-            <img src="${i.foto}" style="width:100%; height:180px; object-fit:cover; border-radius:16px;">
-            <h3>😺 ${i.kediAdi} <span style="font-size:0.9rem;">(${i.ilce})</span></h3>
-            <p>📍 ${i.mahalle}</p><p>📅 ${gunText} kayıp</p><p>📝 ${i.aciklama||''}</p>
+            <div class="foto-galeri">
+              ${(i.fotolar || [i.foto]).map(f => `<img src="${f}" onerror="this.src='https://picsum.photos/200/200?random=${i.id}'">`).join('')}
+            </div>
+            <h3>
+              😺 ${i.kediAdi} <span style="font-size:0.9rem;">(${i.ilce})</span>
+              ${i.acil ? '<span class="super-acil-badge">🚨 SÜPER ACİL</span>' : ''}
+              ${fotoDogrulandi ? '<span class="verified-badge">✅ Doğrulandı</span>' : ''}
+            </h3>
+            <p>📍 ${i.mahalle}</p>
+            <p>📅 ${gunText} kayıp</p>
+            <p>📝 ${i.aciklama||''}</p>
             ${i.eski ? '<span class="badge" style="background:#e67e22;">30+ gün</span>' : ''}
             <div class="button-group">
               <a href="mailto:${i.mail}?subject=PatiBul:%20${i.kediAdi}%20Görüldü&body=Merhaba,%20${i.kediAdi}%20adlı%20kedinizi%20${i.mahalle}%20civarında%20gördüm." class="btn" style="background:#3498db;">👁️ Gördüm</a>
               <a href="mailto:${i.mail}?subject=PatiBul:%20${i.kediAdi}%20için%20İpucu&body=Merhaba,%20${i.kediAdi}%20hakkında%20ipucum%20var:" class="btn" style="background:#9b59b6;">💡 İpucu</a>
               <button class="btn" onclick="linkKopyala('${location.origin}/ilan/${i.id}')">🔗</button>
+              <a href="${haritaLink}" target="_blank" class="btn ${i.acil ? 'harita-acil' : ''}" style="background:#4285F4;">🗺️ Harita</a>
               <button class="btn secondary" onclick="bulunduIste(${i.id})">✅ Bulundu</button>
               <button class="btn" style="background:#e74c3c;" onclick="sikayetModalAc(${i.id}, '${i.kediAdi}')">⚠️ Şikayet</button>
-              <a href="mailto:?subject=Kayıp Kedi: ${i.kediAdi}&body=${i.ilce} ${i.mahalle}'de kayıp. Detay: ${location.origin}/ilan/${i.id}" class="btn" style="background:#2ecc71;">📤 Paylaş</a>
             </div>
+            ${digerIlanlar.length > 0 ? `
+              <div class="diger-ilanlar">
+                🐾 Bu kullanıcının <a onclick="digerIlanlariGoster('${i.mail}')">${digerIlanlar.length} kayıp ilanı daha var</a>
+              </div>
+            ` : ''}
           </div>
         `;
       }).join('');
     }
 
+    window.digerIlanlariGoster = (mail) => {
+      const digerler = tumIlanlar.filter(i => i.mail === mail && !i.bulundu && !i.silindi);
+      alert(digerler.map(i => `- ${i.kediAdi} (${i.ilce} - ${i.mahalle})`).join('\n'));
+    };
+
     window.linkKopyala = (text) => { navigator.clipboard?.writeText(text); alert('Link kopyalandı!'); };
+
     window.bulunduIste = async (id) => {
       const sifre = prompt('Admin şifresi:');
       if (!sifre) return;
@@ -376,6 +475,7 @@
       }
     };
 
+    // ========== ŞİKAYET MODAL ==========
     let sikayetEdilecekId = null;
     function sikayetModalAc(id, ad) {
       sikayetEdilecekId = id;
@@ -390,17 +490,10 @@
       let aciklama = '';
       if (sebep === 'Diğer') {
         aciklama = document.getElementById('digerAciklama').value.trim();
-        if (!aciklama) {
-          alert('Lütfen bir açıklama yazın.');
-          return;
-        }
+        if (!aciklama) { alert('Lütfen açıklama yazın.'); return; }
       }
       document.getElementById('sikayetModal').style.display = 'none';
-      const res = await fetch('/sikayet', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ id: sikayetEdilecekId, sebep, aciklama })
-      });
+      const res = await fetch('/sikayet', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id:sikayetEdilecekId, sebep, aciklama}) });
       const data = await res.json();
       if (data.basarili) { alert(`Şikayet alındı. (${data.sayi}/3)`); verileriYukle(); }
     }
@@ -420,29 +513,7 @@
       document.getElementById('sikayetModal').style.display = 'none';
     });
 
-    // Diğer için gönder butonu (opsiyonel, istersen modalda ekstra buton)
-    // Burada diğer seçildiğinde açıklama alanı çıkıyor, kullanıcı tekrar Diğer'e basarsa göndersin
-    // ya da biz bir "Gönder" butonu ekleyelim. Kolaylık olsun diye Diğer seçeneğine ikinci tıklamada göndersin.
-    let digerSecildi = false;
-    document.getElementById('digerSecenek').addEventListener('click', function() {
-      const box = document.getElementById('digerAciklamaBox');
-      if (!digerSecildi) {
-        box.classList.remove('hidden');
-        digerSecildi = true;
-        this.textContent = '📤 Şikayeti Gönder';
-      } else {
-        const aciklama = document.getElementById('digerAciklama').value.trim();
-        if (!aciklama) {
-          alert('Lütfen bir açıklama yazın.');
-          return;
-        }
-        sikayetGonder('Diğer');
-        digerSecildi = false;
-        this.textContent = '❓ Diğer';
-        box.classList.add('hidden');
-      }
-    });
-
+    // ========== CAPTCHA ==========
     async function captchaGetir() {
       const res = await fetch('/captcha');
       captchaSorusu = await res.json();
@@ -458,42 +529,58 @@
       box.innerHTML = html;
     }
 
+    // ========== İLAN EKLE ==========
+    function fileToBase64(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
     document.getElementById('ilanForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const file = document.getElementById('fotoInput').files[0];
-      if (!file) return alert('Fotoğraf zorunlu!');
-      const reader = new FileReader();
-      reader.onload = async (ev) => {
-        let cevap = '';
-        if (captchaSorusu.tip === 'text') cevap = document.getElementById('captchaCevap').value;
-        else {
-          const sec = document.querySelector('input[name="captchaSec"]:checked');
-          cevap = sec ? sec.value : '';
-        }
-        const payload = {
-          foto: ev.target.result,
-          kediAdi: document.getElementById('kediAdi').value,
-          mahalle: document.getElementById('mahalle').value,
-          aciklama: document.getElementById('aciklama').value,
-          mail: document.getElementById('mail').value,
-          ilce: ilceSelect.value,
-          acil: document.getElementById('acilCheck').checked,
-          captchaCevap: cevap,
-          dogruCevap: document.getElementById('dogruCevap').value
-        };
-        const res = await fetch('/ilan-ekle', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-        const data = await res.json();
-        if (data.uyari && data.onayla) {
-          if (confirm(data.uyari)) {
-            payload.onayli = true;
-            const res2 = await fetch('/ilan-ekle', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-            if (res2.ok) { alert('Eklendi!'); document.getElementById('formKonteyner').classList.add('hidden'); verileriYukle(); }
-          }
-        } else if (data.basarili) {
-          alert('Eklendi!'); document.getElementById('formKonteyner').classList.add('hidden'); verileriYukle();
-        } else alert(data.hata);
+      const files = document.getElementById('fotoInput').files;
+      if (files.length < 1 || files.length > 3) {
+        alert('En az 1, en fazla 3 fotoğraf seçmelisiniz.');
+        return;
+      }
+
+      const fotolar = [];
+      for (let file of files) {
+        fotolar.push(await fileToBase64(file));
+      }
+
+      let cevap = '';
+      if (captchaSorusu.tip === 'text') cevap = document.getElementById('captchaCevap').value;
+      else {
+        const sec = document.querySelector('input[name="captchaSec"]:checked');
+        cevap = sec ? sec.value : '';
+      }
+
+      const payload = {
+        fotolar,
+        kediAdi: document.getElementById('kediAdi').value,
+        mahalle: document.getElementById('mahalle').value,
+        aciklama: document.getElementById('aciklama').value,
+        mail: document.getElementById('mail').value,
+        ilce: ilceSelect.value,
+        acil: document.getElementById('acilCheck').checked,
+        captchaCevap: cevap,
+        dogruCevap: document.getElementById('dogruCevap').value
       };
-      reader.readAsDataURL(file);
+
+      const res = await fetch('/ilan-ekle', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+      const data = await res.json();
+      if (data.uyari && data.onayla) {
+        if (confirm(data.uyari)) {
+          payload.onayli = true;
+          const res2 = await fetch('/ilan-ekle', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+          if (res2.ok) { alert('Eklendi!'); document.getElementById('formKonteyner').classList.add('hidden'); verileriYukle(); }
+        }
+      } else if (data.basarili) {
+        alert('Eklendi!'); document.getElementById('formKonteyner').classList.add('hidden'); verileriYukle();
+      } else alert(data.hata);
     });
 
     document.getElementById('ilanVerBtn').addEventListener('click', () => {
@@ -505,7 +592,7 @@
     });
     ilceFilter.addEventListener('change', ilanlariGoster);
 
-    // Admin panel
+    // ========== ADMIN ==========
     document.getElementById('adminGiris').addEventListener('click', async () => {
       const sifre = document.getElementById('adminSifre').value;
       const res = await fetch('/admin', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({sifre}) });
@@ -533,6 +620,7 @@
       if (res.ok) { alert('Örnek ilanlar geri yüklendi!'); verileriYukle(); }
     };
 
+    // ========== BAŞLAT ==========
     verileriYukle();
   </script>
 </body>
