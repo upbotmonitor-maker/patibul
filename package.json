@@ -1,0 +1,13 @@
+{
+  "name": "patibul-trabzon",
+  "version": "2.0.0",
+  "description": "Kayıp kedi ilan sitesi - Trabzon",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7"
+  }
+}
