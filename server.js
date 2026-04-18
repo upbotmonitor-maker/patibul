@@ -90,11 +90,17 @@ function ensureSampleAds() {
         foto: 'https://i.imgur.com/V077wnS.jpeg',
         kediAdi: 'Duman',
         mahalle: 'Kalkınma',
-        aciklama: '!!! LÜTFEN DİKKAT !!!
-Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
-Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
-SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
-Tüm şaka mesajları engellenecektir.',
+        aciklama: `!!! LÜTFEN DİKKAT!!!
+Bu ilan GERÇEKTİR. Şaka/trol değildir.
+
+[Minnoş/Paşa/Duman] adlı kedim kayıp. [Kaç gündür] yok.
+Son fotoğrafı: [Tarih]. Tüyleri ışıkta renk değiştirebiliyor.
+
+SADECE KEDİYİ GÖREN VE KONUM + FOTOĞRAF ATABİLEN KİŞİLER YAZSIN.
+Şaka amaçlı mesaj atanlar engellenecektir.
+
+3 arkadaşın kedisi kayıp. Minnoş, Paşa, Duman. Hepimiz çok üzgünüz.
+Gerçek bilgi verene minnettar kalırız.`,
         mail: 'nan619381@gmail.com',
         ilce: 'Ortahisar',
         acil: false,
@@ -113,11 +119,17 @@ Tüm şaka mesajları engellenecektir.',
         foto: 'https://i.imgur.com/fUCdV7g.jpeg',
         kediAdi: 'Paşa',
         mahalle: 'Pelitli',
-        aciklama: '!!! LÜTFEN DİKKAT !!!
-Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
-Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
-SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
-Tüm şaka mesajları engellenecektir.',
+        aciklama: `!!! LÜTFEN DİKKAT!!!
+Bu ilan GERÇEKTİR. Şaka/trol değildir.
+
+[Minnoş/Paşa/Duman] adlı kedim kayıp. [Kaç gündür] yok.
+Son fotoğrafı: [Tarih]. Tüyleri ışıkta renk değiştirebiliyor.
+
+SADECE KEDİYİ GÖREN VE KONUM + FOTOĞRAF ATABİLEN KİŞİLER YAZSIN.
+Şaka amaçlı mesaj atanlar engellenecektir.
+
+3 arkadaşın kedisi kayıp. Minnoş, Paşa, Duman. Hepimiz çok üzgünüz.
+Gerçek bilgi verene minnettar kalırız.`,
         mail: 'm76887136@gmail.com',
         ilce: 'Ortahisar',
         acil: true,
@@ -136,11 +148,17 @@ Tüm şaka mesajları engellenecektir.',
         foto: 'https://i.imgur.com/YiTdBMP.jpeg',
         kediAdi: 'Minnoş',
         mahalle: 'Söğütlü',
-        aciklama: '!!! LÜTFEN DİKKAT !!!
-Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
-Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
-SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
-Tüm şaka mesajları engellenecektir.',
+        aciklama: `!!! LÜTFEN DİKKAT!!!
+Bu ilan GERÇEKTİR. Şaka/trol değildir.
+
+[Minnoş/Paşa/Duman] adlı kedim kayıp. [Kaç gündür] yok.
+Son fotoğrafı: [Tarih]. Tüyleri ışıkta renk değiştirebiliyor.
+
+SADECE KEDİYİ GÖREN VE KONUM + FOTOĞRAF ATABİLEN KİŞİLER YAZSIN.
+Şaka amaçlı mesaj atanlar engellenecektir.
+
+3 arkadaşın kedisi kayıp. Minnoş, Paşa, Duman. Hepimiz çok üzgünüz.
+Gerçek bilgi verene minnettar kalırız.`,
         mail: 'lol886275@gmail.com',
         ilce: 'Ortahisar',
         acil: false,
