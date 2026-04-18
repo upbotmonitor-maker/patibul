@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatiBul Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff9f0;
+      padding: 20px;
+      transition: background 0.3s;
+    }
+    body.dark {
+      background: #1a1e2b;
+      color: #eee;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-left: 8px solid #e67e22;
+      margin-bottom: 20px;
+    }
+    body.dark .card {
+      background: #2a2f3f;
+    }
+    h1 {
+      color: #e67e22;
+      margin-bottom: 20px;
+    }
+    input, button, textarea {
+      padding: 12px 16px;
+      border-radius: 30px;
+      border: 2px solid #f0c8a0;
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+    button {
+      background: #e67e22;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      margin: 5px 0;
+    }
+    .ilan-item {
+      background: #fff1e0;
+      padding: 15px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    body.dark .ilan-item {
+      background: #3a3f55;
+    }
+    .silindi { opacity: 0.6; text-decoration: line-through; }
+    .tema-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      float: right;
+    }
+    .mail-box {
+      margin-top: 10px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .mail-box input {
+      flex: 1;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="light">
+  <div class="container">
+    <button class="tema-btn" id="temaToggle">🌙</button>
+    <h1>🐱 PatiBul Admin</h1>
+
+    <div id="loginBox" class="card">
+      <h3>🔐 Admin Girişi</h3>
+      <input type="password" id="adminSifreInput" placeholder="Admin Şifresi">
+      <button id="girisBtn">Giriş Yap</button>
+    </div>
+
+    <div id="panelBox" class="card hidden">
+      <h3>📋 İlan Yönetimi</h3>
+      <button id="ornekIlanBtn">🐱 Örnek İlanları Geri Yükle</button>
+      <div id="ilanListesi"></div>
+    </div>
+  </div>
+
+  <script>
+    let adminSifre = '';
+
+    // Tema
+    const temaToggle = document.getElementById('temaToggle');
+    function temaUygula() {
+      const kayitli = localStorage.getItem('tema') || 'light';
+      document.body.className = kayitli;
+      temaToggle.textContent = kayitli === 'light' ? '🌙' : '☀️';
+    }
+    temaUygula();
+    temaToggle.addEventListener('click', () => {
+      const yeni = document.body.className === 'light' ? 'dark' : 'light';
+      localStorage.setItem('tema', yeni);
+      temaUygula();
+    });
+
+    // Giriş
+    document.getElementById('girisBtn').addEventListener('click', async () => {
+      const sifre = document.getElementById('adminSifreInput').value;
+      if (!sifre) return alert('Şifre girin');
+
+      const res = await fetch('/admin', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ sifre })
+      });
+
+      if (res.ok) {
+        adminSifre = sifre;
+        document.getElementById('loginBox').classList.add('hidden');
+        document.getElementById('panelBox').classList.remove('hidden');
+        ilanlariYukle();
+      } else {
+        alert('Şifre yanlış!');
+      }
+    });
+
+    async function ilanlariYukle() {
+      const res = await fetch('/admin', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ sifre: adminSifre })
+      });
+      const data = await res.json();
+      const container = document.getElementById('ilanListesi');
+
+      container.innerHTML = data.ilanlar.map(i => `
+        <div class="ilan-item ${i.silindi ? 'silindi' : ''}">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>
+              <strong>ID ${i.id}</strong> - ${i.kediAdi} (${i.ilce})<br>
+              <small>📧 ${i.mail} | Şikayet: ${i.sikayetSayisi || 0}</small>
+            </span>
+            <span>
+              ${i.silindi ? 
+                `<button onclick="geriAl(${i.id})">↩️ Geri Al</button>` : 
+                `<button onclick="sil(${i.id})" style="background:#e74c3c;">🗑️ Sil</button>`
+              }
+            </span>
+          </div>
+          <div class="mail-box">
+            <input type="text" id="mesaj-${i.id}" placeholder="İlan sahibine mesaj yazın..." style="flex:1;">
+            <button onclick="mailGonder(${i.id})">✉️ Mail Gönder</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.geriAl = async (id) => {
+      await fetch('/geri-al', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ id, sifre: adminSifre })
+      });
+      ilanlariYukle();
+    };
+
+    window.sil = async (id) => {
+      if (!confirm('İlanı silmek istediğinize emin misiniz?')) return;
+      await fetch('/admin/sil', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ id, sifre: adminSifre })
+      });
+      ilanlariYukle();
+    };
+
+    window.mailGonder = async (id) => {
+      const mesajInput = document.getElementById(`mesaj-${id}`);
+      const mesaj = mesajInput.value.trim();
+      if (!mesaj) return alert('Lütfen bir mesaj yazın.');
+
+      const res = await fetch('/admin/mail-gonder', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ id, sifre: adminSifre, mesaj })
+      });
+      const data = await res.json();
+      if (data.basarili) {
+        alert('Mail başarıyla gönderildi!');
+        mesajInput.value = '';
+      } else {
+        alert('Mail gönderilemedi: ' + (data.hata || 'Bilinmeyen hata'));
+      }
+    };
+
+    document.getElementById('ornekIlanBtn').addEventListener('click', async () => {
+      if (!confirm('Örnek ilanlar yüklenecek. Mevcut ilanlar korunur, silinmiş ilanlar temizlenir.')) return;
+      const res = await fetch('/admin/ornek-ilanlari-yukle', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ sifre: adminSifre })
+      });
+      if (res.ok) {
+        alert('Örnek ilanlar eklendi!');
+        ilanlariYukle();
+      }
+    });
+  </script>
+</body>
+</html>
