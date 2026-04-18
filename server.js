@@ -125,7 +125,7 @@ function ensureSampleAds() {
       },
       {
         id: 3,
-        foto: 'https://i.imgur.com/28iNrAJ.jpeg',
+        foto: 'https://i.imgur.com/YiTdBMP.jpeg',
         kediAdi: 'Minnoş',
         mahalle: 'Söğütlü',
         aciklama: 'Siyah-beyaz, mavi gözlü.',
