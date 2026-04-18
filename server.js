@@ -123,26 +123,27 @@ function ensureSampleAds() {
         fotolar: ['https://i.imgur.com/S5opurd.jpeg'],
         kediAdi: 'Loki',
         mahalle: 'Çukurçayır',
-        aciklama: `Süper Acil işaretli gerçek kayıp ilanıdır.
+        aciklama: `‼️ LÜTFEN YARDIM EDİN - BULANA TEŞEKKÜR HEDİYESİ VAR ‼️
+Süper Acil işaretli gerçek kayıp ilanıdır.
+Kedimizi sağ salim bulup kavuşmamızı sağlayana ailesi tarafından teşekkür hediyesi verilecektir.
 
 Kedimizin Adı: Loki
-Kaybolma Tarihi: 18.04.2026 - Bugün
+Kaybolma Tarihi: 18.04.2026 - Bugün, 2 saat önce
 Kaybolduğu Yer: Trabzon, Çukurçayır Mahallesi
-Cinsiyeti: [Dişi/Erkek yaz]
-Yaşı: [Yaklaşık yaş yaz]
-Tüy Rengi/Özelliği: [Sarman/tekir/siyah vs. + göz rengi yaz]
-Tasması Var Mı: [Var / Yok. Varsa rengi]
-Kısır Mı: [Evet/Hayır/Bilmiyorum yaz]
+Cinsiyeti: Erkek
+Yaşı: 2 yaşında
+Tüy Rengi/Özelliği: Gri tekir, yeşil gözlü
+Tasması Var Mı: Yok
+Kısır Mı: Bilmiyoruz
 Özel İşareti: Bilmiyoruz
 
-Fotoğraf günceldir. Bugün kayboldu.
+Fotoğraf günceldir. Loki 11 yaşındaki sahibinin en yakın arkadaşı, bugün evden çıktı ve kayboldu.
 
 ÖNEMLİ: Bu hesabın 3 kayıp ilanı daha vardır. Minnoş, Paşa, Duman da aranıyor. 4 arkadaş olarak perişan haldeyiz.
 
- SADECE GÖREN VE FOTOĞRAF + KONUM ATABİLECEK KİŞİLER YAZSIN.
+LÜTFEN SADECE GÖREN VE FOTOĞRAF + KONUM ATABİLECEK KİŞİLER YAZSIN.
 
-BULANA VEYA NET KONUM VERENE ÖDÜL VERİLECEKTİR.
-İlanı arkadaşım adına ben açıyorum. İletişim Patı Bul üzerinden.`,
+İlan sahibi adına ben ilgileniyorum. İletişim sadece Patı Bul üzerinden.`,
         mail: 'b48492401@gmail.com',
         ilce: 'Ortahisar',
         acil: true,
