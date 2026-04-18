@@ -90,7 +90,11 @@ function ensureSampleAds() {
         foto: 'https://i.imgur.com/V077wnS.jpeg',
         kediAdi: 'Duman',
         mahalle: 'Kalkınma',
-        aciklama: 'Gri-beyaz tekir, kırmızı tasması var.',
+        aciklama: '!!! LÜTFEN DİKKAT !!!
+Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
+Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
+SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
+Tüm şaka mesajları engellenecektir.',
         mail: 'nan619381@gmail.com',
         ilce: 'Ortahisar',
         acil: false,
@@ -109,7 +113,11 @@ function ensureSampleAds() {
         foto: 'https://i.imgur.com/fUCdV7g.jpeg',
         kediAdi: 'Paşa',
         mahalle: 'Pelitli',
-        aciklama: 'Sarı-beyaz, çok sevecen.',
+        aciklama: '!!! LÜTFEN DİKKAT !!!
+Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
+Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
+SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
+Tüm şaka mesajları engellenecektir.',
         mail: 'm76887136@gmail.com',
         ilce: 'Ortahisar',
         acil: true,
@@ -128,7 +136,11 @@ function ensureSampleAds() {
         foto: 'https://i.imgur.com/YiTdBMP.jpeg',
         kediAdi: 'Minnoş',
         mahalle: 'Söğütlü',
-        aciklama: 'Siyah-beyaz, mavi gözlü.',
+        aciklama: '!!! LÜTFEN DİKKAT !!!
+Bu 3 ilan gerçek kayıp kediler içindir. Minnoş, Paşa ve Duman.
+Şaka/troll amaçlı mesaj atmayın. 3 aile çok üzgün.
+SADECE KEDİYİ GÖREN VE KONUM/FOTOĞRAF ATABİLECEK KİŞİLER YAZSIN.
+Tüm şaka mesajları engellenecektir.',
         mail: 'lol886275@gmail.com',
         ilce: 'Ortahisar',
         acil: false,
