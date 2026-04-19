@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatiBul Trabzon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #fff;
+      color: #202124;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 14px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #5f6368;
+      font-weight: 500;
+    }
+
+    .logo-mark {
+      width: 20px;
+      height: 20px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 24px 60px;
+      width: 100%;
+    }
+
+    .illustration {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #202124;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+
+    .body-text {
+      font-size: 0.9rem;
+      color: #3c4043;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .body-text a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .body-text a:hover { text-decoration: underline; }
+
+    .contact-line {
+      font-size: 0.9rem;
+      color: #3c4043;
+      line-height: 1.75;
+      margin-top: 6px;
+    }
+
+    .contact-line a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .contact-line a:hover { text-decoration: underline; }
+
+    footer {
+      padding: 14px 20px;
+      border-top: 1px solid #e8eaed;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      font-size: 0.78rem;
+      color: #5f6368;
+      text-decoration: none;
+    }
+    footer a:hover { color: #202124; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="10" fill="#f97316"/>
+        <text x="5" y="15" font-size="12" fill="white">🐾</text>
+      </svg>
+      PatiBul Trabzon
+    </div>
+  </header>
+
+  <main>
+
+    <!-- İLLÜSTRASYON -->
+    <svg class="illustration" viewBox="0 0 560 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Bulutlar sol -->
+      <ellipse cx="80" cy="65" rx="38" ry="22" fill="#f1f3f4"/>
+      <ellipse cx="108" cy="57" rx="28" ry="18" fill="#f1f3f4"/>
+      <ellipse cx="58" cy="72" rx="24" ry="15" fill="#f1f3f4"/>
+
+      <!-- Bulutlar sağ -->
+      <ellipse cx="478" cy="60" rx="38" ry="22" fill="#f1f3f4"/>
+      <ellipse cx="506" cy="52" rx="28" ry="18" fill="#f1f3f4"/>
+      <ellipse cx="456" cy="68" rx="24" ry="15" fill="#f1f3f4"/>
+
+      <!-- Zemin -->
+      <ellipse cx="280" cy="272" rx="230" ry="16" fill="#f1f3f4"/>
+      <rect x="70" y="244" width="420" height="28" rx="10" fill="#e8eaed"/>
+      <rect x="90" y="237" width="380" height="12" rx="6" fill="#dadce0"/>
+
+      <!-- Yapraklar sol -->
+      <ellipse cx="82" cy="198" rx="13" ry="6" fill="#86efac" transform="rotate(-40 82 198)"/>
+      <ellipse cx="66" cy="214" rx="11" ry="5" fill="#4ade80" transform="rotate(-55 66 214)"/>
+      <ellipse cx="98" cy="178" rx="9" ry="4" fill="#bbf7d0" transform="rotate(-20 98 178)"/>
+
+      <!-- Yapraklar sağ -->
+      <ellipse cx="478" cy="195" rx="13" ry="6" fill="#86efac" transform="rotate(40 478 195)"/>
+      <ellipse cx="494" cy="211" rx="11" ry="5" fill="#4ade80" transform="rotate(55 494 211)"/>
+      <ellipse cx="462" cy="176" rx="9" ry="4" fill="#bbf7d0" transform="rotate(20 462 176)"/>
+
+      <!-- ===== SOL KEDİ (turuncu tekir) ===== -->
+      <!-- kuyruk -->
+      <path d="M88 230 Q55 210 62 180 Q68 160 85 168" stroke="#f97316" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <!-- gövde -->
+      <ellipse cx="127" cy="210" rx="46" ry="38" fill="#f97316"/>
+      <!-- karnı beyaz -->
+      <ellipse cx="127" cy="218" rx="26" ry="22" fill="#fed7aa"/>
+      <!-- tekir çizgileri -->
+      <path d="M108 195 Q115 190 122 196" stroke="#ea580c" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M132 196 Q139 190 146 195" stroke="#ea580c" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- ön pençeler -->
+      <ellipse cx="105" cy="238" rx="14" ry="9" fill="#f97316"/>
+      <ellipse cx="149" cy="238" rx="14" ry="9" fill="#f97316"/>
+      <!-- uzanan pençe (belgeye doğru) -->
+      <path d="M168 215 Q200 208 220 185" stroke="#f97316" stroke-width="12" stroke-linecap="round" fill="none"/>
+      <ellipse cx="224" cy="182" rx="12" ry="9" fill="#fed7aa" transform="rotate(-20 224 182)"/>
+      <!-- baş -->
+      <circle cx="127" cy="163" r="38" fill="#f97316"/>
+      <!-- kulaklar sol -->
+      <polygon points="95,138 88,110 112,128" fill="#f97316"/>
+      <polygon points="98,136 93,116 110,128" fill="#fecaca"/>
+      <!-- kulaklar sağ -->
+      <polygon points="159,138 166,110 142,128" fill="#f97316"/>
+      <polygon points="156,136 161,116 144,128" fill="#fecaca"/>
+      <!-- yüz beyaz -->
+      <ellipse cx="127" cy="172" rx="22" ry="16" fill="#fed7aa"/>
+      <!-- gözler (mutlu) -->
+      <path d="M112 158 Q116 153 120 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M134 158 Q138 153 142 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- burun -->
+      <ellipse cx="127" cy="167" rx="4" ry="3" fill="#f43f5e"/>
+      <!-- ağız -->
+      <path d="M123 170 Q127 175 131 170" stroke="#111827" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- bıyıklar sol -->
+      <line x1="95" y1="166" x2="118" y2="168" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="95" y1="172" x2="118" y2="171" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- bıyıklar sağ -->
+      <line x1="136" y1="168" x2="159" y2="166" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="136" y1="171" x2="159" y2="172" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+
+      <!-- ===== ORTA: Devir Belgesi ===== -->
+      <rect x="215" y="130" width="130" height="105" rx="14" fill="#fff" stroke="#e5e7eb" stroke-width="2"/>
+      <rect x="231" y="150" width="98" height="10" rx="5" fill="#fbbc04"/>
+      <rect x="231" y="167" width="72" height="7" rx="3.5" fill="#e8eaed"/>
+      <rect x="231" y="180" width="86" height="7" rx="3.5" fill="#e8eaed"/>
+      <rect x="231" y="193" width="58" height="7" rx="3.5" fill="#e8eaed"/>
+      <!-- pati izi -->
+      <circle cx="248" cy="218" r="5" fill="#f97316" opacity=".5"/>
+      <circle cx="258" cy="213" r="4" fill="#f97316" opacity=".5"/>
+      <circle cx="266" cy="218" r="4" fill="#f97316" opacity=".5"/>
+      <ellipse cx="257" cy="224" rx="9" ry="6" fill="#f97316" opacity=".4"/>
+      <!-- Onay damgası -->
+      <circle cx="325" cy="138" r="20" fill="#22c55e"/>
+      <path d="M315 138 l7 7.5 l13-14" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- ===== SAĞ KEDİ (gri) ===== -->
+      <!-- kuyruk -->
+      <path d="M472 230 Q505 210 498 180 Q492 160 475 168" stroke="#6b7280" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <!-- gövde -->
+      <ellipse cx="433" cy="210" rx="46" ry="38" fill="#9ca3af"/>
+      <!-- karnı beyaz -->
+      <ellipse cx="433" cy="218" rx="26" ry="22" fill="#e5e7eb"/>
+      <!-- ön pençeler -->
+      <ellipse cx="411" cy="238" rx="14" ry="9" fill="#9ca3af"/>
+      <ellipse cx="455" cy="238" rx="14" ry="9" fill="#9ca3af"/>
+      <!-- uzanan pençe (belgeye doğru) -->
+      <path d="M392 215 Q360 208 340 185" stroke="#9ca3af" stroke-width="12" stroke-linecap="round" fill="none"/>
+      <ellipse cx="336" cy="182" rx="12" ry="9" fill="#e5e7eb" transform="rotate(20 336 182)"/>
+      <!-- baş -->
+      <circle cx="433" cy="163" r="38" fill="#9ca3af"/>
+      <!-- kulaklar sol -->
+      <polygon points="401,138 394,110 418,128" fill="#9ca3af"/>
+      <polygon points="404,136 399,116 416,128" fill="#fecaca"/>
+      <!-- kulaklar sağ -->
+      <polygon points="465,138 472,110 448,128" fill="#9ca3af"/>
+      <polygon points="462,136 467,116 450,128" fill="#fecaca"/>
+      <!-- yüz beyaz -->
+      <ellipse cx="433" cy="172" rx="22" ry="16" fill="#e5e7eb"/>
+      <!-- gözler (mutlu) -->
+      <path d="M418 158 Q422 153 426 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M440 158 Q444 153 448 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- burun -->
+      <ellipse cx="433" cy="167" rx="4" ry="3" fill="#f43f5e"/>
+      <!-- ağız -->
+      <path d="M429 170 Q433 175 437 170" stroke="#111827" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- bıyıklar sol -->
+      <line x1="401" y1="166" x2="424" y2="168" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="401" y1="172" x2="424" y2="171" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- bıyıklar sağ -->
+      <line x1="442" y1="168" x2="465" y2="166" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="442" y1="171" x2="465" y2="172" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+
+      <!-- Küçük kalpler ve yıldızlar -->
+      <text x="46" y="155" font-size="18">❤️</text>
+      <text x="498" y="148" font-size="18">⭐</text>
+      <text x="268" y="118" font-size="15">🐾</text>
+
+    </svg>
+
+    <h1>PatiBul Trabzon'un Yeni Ekibe<br>Devredilmesi Hakkında</h1>
+
+    <p class="body-text">
+      PatiBul Trabzon, Trabzon'daki kayıp kedi sahiplerine yıllarca hizmet verdikten sonra
+      yeni bir ekibe resmi olarak devredilmiştir. Bu devir, sitenin daha güçlü ve sürdürülebilir
+      bir şekilde yoluna devam etmesi amacıyla gerçekleştirilmiştir.
+    </p>
+
+    <p class="body-text">
+      Yeni ekip siteyi yakın zamanda yeniden düzenleyerek hizmete açacaktır. Bu süreçte
+      tüm ilan verileri ve kullanıcı bilgileri güvende olup yeni sahiplere eksiksiz aktarılmıştır.
+    </p>
+
+    <p class="body-text">
+      Daha fazla bilgi için <a href="mailto:destek@patibul.ccwu.cc">destek@patibul.ccwu.cc</a> adresine ulaşabilirsiniz.
+    </p>
+
+    <p class="contact-line">
+      Kayıp kedi acil bildirimleri için <a href="mailto:destek@patibul.ccwu.cc">yeni ekiple iletişime geçin</a>.
+    </p>
+
+  </main>
+
+  <footer>
+    <a href="#">PatiBul</a>
+    <a href="#">PatiBul Hakkında</a>
+    <a href="#">Gizlilik</a>
+    <a href="#">Şartlar</a>
+  </footer>
+
+</body>
+</html>
