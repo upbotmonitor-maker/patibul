@@ -1,277 +1,448 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PatiBul Trabzon</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;700&family=Roboto:wght@400;500&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Google • Güvenlik Uyarısı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
 
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #fff;
-      color: #202124;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        /* Google Translate bandı */
+        .translate-bar {
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #dadce0;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.82rem;
+            color: #5f6368;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        .translate-bar svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
 
-    header {
-      padding: 14px 20px;
-    }
+        /* Safe Browsing kırmızı banner */
+        .safebrowsing-banner {
+            width: 100%;
+            background: #d93025;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        .safebrowsing-banner svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            fill: #fff;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      color: #5f6368;
-      font-weight: 500;
-    }
+        /* Ana içerik kartı */
+        .warning-card {
+            background: #ffffff;
+            max-width: 720px;
+            width: 100%;
+            margin: 1.5rem;
+            border-radius: 28px;
+            padding: 2.8rem 2.2rem 2.5rem;
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            text-align: left;
+            animation: fadeIn 0.3s ease-out;
+        }
 
-    .logo-mark {
-      width: 20px;
-      height: 20px;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    main {
-      flex: 1;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px 24px 60px;
-      width: 100%;
-    }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.8rem;
+        }
+        .google-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        .header-text {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #202124;
+            letter-spacing: -0.2px;
+        }
+        .header-text strong {
+            font-weight: 500;
+            color: #ea4335;
+        }
 
-    .illustration {
-      width: 100%;
-      max-width: 560px;
-      margin: 0 auto 36px;
-      display: block;
-    }
+        /* Uyarı kutusu */
+        .alert-box {
+            background: #fce8e6;
+            border-left: 6px solid #ea4335;
+            border-radius: 12px;
+            padding: 1.3rem 1.5rem;
+            margin: 1.5rem 0 1.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .alert-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+        }
+        .alert-content h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #c5221f;
+            margin: 0 0 0.35rem;
+            line-height: 1.3;
+        }
+        .alert-content p {
+            font-size: 0.95rem;
+            color: #5f6368;
+            line-height: 1.5;
+            margin: 0.45rem 0 0;
+        }
+        .alert-content strong {
+            color: #202124;
+            font-weight: 500;
+        }
 
-    h1 {
-      font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: #202124;
-      line-height: 1.35;
-      margin-bottom: 20px;
-    }
+        /* Manuel İşlem kutusu */
+        .manual-action {
+            background: #fff8e1;
+            border: 1px solid #f9ab00;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .manual-action svg {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            fill: #f9ab00;
+        }
+        .manual-action div h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #e37400;
+            margin: 0 0 0.25rem;
+        }
+        .manual-action div p {
+            font-size: 0.9rem;
+            color: #3c4043;
+            margin: 0.2rem 0;
+            line-height: 1.5;
+        }
+        .tag {
+            display: inline-block;
+            background: #fce8e6;
+            color: #c5221f;
+            font-weight: 600;
+            font-size: 0.78rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 16px;
+            margin-right: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
 
-    .body-text {
-      font-size: 0.9rem;
-      color: #3c4043;
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
+        /* URL çubuğu */
+        .url-bar {
+            background: #f1f3f4;
+            border-radius: 24px;
+            padding: 0.75rem 1.2rem;
+            margin: 1.5rem 0;
+            font-family: 'Google Sans Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #5f6368;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid #dadce0;
+        }
+        .url-bar .lock {
+            color: #ea4335;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .url-bar .site-name {
+            color: #ea4335;
+            font-weight: 600;
+            text-decoration: line-through;
+        }
+        .url-bar .suffix {
+            color: #80868b;
+        }
 
-    .body-text a {
-      color: #1a73e8;
-      text-decoration: none;
-    }
-    .body-text a:hover { text-decoration: underline; }
+        /* Teknik detaylar tablosu */
+        .tech-details {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 1.3rem 1.5rem;
+            margin: 1.8rem 0;
+            font-size: 0.88rem;
+            color: #3c4043;
+            border: 1px solid #e8eaed;
+        }
+        .tech-details h4 {
+            font-weight: 500;
+            margin: 0 0 0.8rem;
+            color: #202124;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .tech-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .tech-details td {
+            padding: 0.45rem 0.2rem;
+            vertical-align: top;
+        }
+        .tech-details td:first-child {
+            font-weight: 500;
+            color: #5f6368;
+            white-space: nowrap;
+            padding-right: 1rem;
+            width: 40%;
+        }
 
-    .contact-line {
-      font-size: 0.9rem;
-      color: #3c4043;
-      line-height: 1.75;
-      margin-top: 6px;
-    }
+        .affected-list {
+            list-style: none;
+            margin: 0.5rem 0 0;
+            padding: 0;
+        }
+        .affected-list li {
+            font-family: monospace;
+            color: #d93025;
+            margin: 0.2rem 0;
+            text-decoration: line-through;
+        }
 
-    .contact-line a {
-      color: #1a73e8;
-      text-decoration: none;
-    }
-    .contact-line a:hover { text-decoration: underline; }
+        .description {
+            color: #3c4043;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 1.8rem 0 0.8rem;
+        }
+        .description .policy-link {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .description .policy-link:hover {
+            text-decoration: underline;
+        }
 
-    footer {
-      padding: 14px 20px;
-      border-top: 1px solid #e8eaed;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+        /* İtiraz yönergesi */
+        .appeal-box {
+            background: #e8f0fe;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.92rem;
+            color: #174ea6;
+            line-height: 1.5;
+            border-left: 5px solid #1a73e8;
+        }
+        .appeal-box a {
+            color: #1a73e8;
+            font-weight: 500;
+        }
 
-    footer a {
-      font-size: 0.78rem;
-      color: #5f6368;
-      text-decoration: none;
-    }
-    footer a:hover { color: #202124; }
-  </style>
+        .footer {
+            margin-top: 2.2rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid #e8eaed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            font-size: 0.82rem;
+            color: #5f6368;
+        }
+        .footer .ref {
+            font-family: 'Google Sans Mono', monospace;
+            background: #f8f9fa;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            color: #3c4043;
+            font-weight: 500;
+        }
+        .google-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #5f6368;
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 600px) {
+            .warning-card {
+                padding: 2rem 1.5rem;
+                border-radius: 20px;
+                margin: 0.8rem;
+            }
+            .alert-box, .manual-action {
+                flex-direction: column;
+                gap: 0.6rem;
+                padding: 1.2rem;
+            }
+            .tech-details td:first-child {
+                white-space: normal;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <div class="logo">
-      <svg class="logo-mark" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="10" fill="#f97316"/>
-        <text x="5" y="15" font-size="12" fill="white">🐾</text>
-      </svg>
-      PatiBul Trabzon
+    <!-- Google Translate bandı -->
+    <div class="translate-bar">
+        <svg viewBox="0 0 24 24" fill="#5f6368"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
+        <span>Google Translate tarafından otomatik çevrilmiştir · <a href="#" style="color:#1a73e8; text-decoration:none;">Orijinalini göster</a></span>
     </div>
-  </header>
 
-  <main>
+    <!-- Safe Browsing kırmızı bandı -->
+    <div class="safebrowsing-banner">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm-1 8h2v5h-2v-5zm1 8.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        <span>Google Güvenli Tarama: Aldatıcı site uyarısı · Tehdit türü: Kimlik Avı / Zararlı Yazılım</span>
+    </div>
 
-    <!-- İLLÜSTRASYON -->
-    <svg class="illustration" viewBox="0 0 560 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Ana uyarı kartı -->
+    <div class="warning-card">
+        <div class="header">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span class="header-text"><strong>Google</strong> Güvenlik Merkezi</span>
+        </div>
 
-      <!-- Bulutlar sol -->
-      <ellipse cx="80" cy="65" rx="38" ry="22" fill="#f1f3f4"/>
-      <ellipse cx="108" cy="57" rx="28" ry="18" fill="#f1f3f4"/>
-      <ellipse cx="58" cy="72" rx="24" ry="15" fill="#f1f3f4"/>
+        <!-- Ana uyarı -->
+        <div class="alert-box">
+            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 22h20L12 2z" fill="#EA4335" stroke="#C5221F" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M12 10v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="17" r="1.5" fill="#fff"/>
+            </svg>
+            <div class="alert-content">
+                <h2>Bu site Google tarafından kapatılmıştır</h2>
+                <p><strong>PatiYuva</strong> projesi, Google politikalarını ciddi şekilde ihlal ettiği gerekçesiyle kalıcı olarak askıya alınmış ve tüm hizmetlerine erişim engellenmiştir.</p>
+            </div>
+        </div>
 
-      <!-- Bulutlar sağ -->
-      <ellipse cx="478" cy="60" rx="38" ry="22" fill="#f1f3f4"/>
-      <ellipse cx="506" cy="52" rx="28" ry="18" fill="#f1f3f4"/>
-      <ellipse cx="456" cy="68" rx="24" ry="15" fill="#f1f3f4"/>
+        <!-- Manuel İşlem kutusu -->
+        <div class="manual-action">
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12zm-9-2h2v2h-2v-2zm0-8h2v6h-2V6z"/></svg>
+            <div>
+                <h3>Manuel İşlem (Search Console)</h3>
+                <p><span class="tag">Aldatıcı içerik</span> <span class="tag">Kimlik avı</span></p>
+                <p>Bu site Google Search Console tarafından manuel işleme tabi tutulmuş ve Google arama sonuçlarından tamamen kaldırılmıştır.</p>
+            </div>
+        </div>
 
-      <!-- Zemin -->
-      <ellipse cx="280" cy="272" rx="230" ry="16" fill="#f1f3f4"/>
-      <rect x="70" y="244" width="420" height="28" rx="10" fill="#e8eaed"/>
-      <rect x="90" y="237" width="380" height="12" rx="6" fill="#dadce0"/>
+        <!-- URL çubuğu -->
+        <div class="url-bar">
+            <span class="lock">&#x1f512;</span>
+            <span class="site-name">patibul.onrender.com</span>
+            <span class="suffix">• bağlantı reddedildi</span>
+        </div>
 
-      <!-- Yapraklar sol -->
-      <ellipse cx="82" cy="198" rx="13" ry="6" fill="#86efac" transform="rotate(-40 82 198)"/>
-      <ellipse cx="66" cy="214" rx="11" ry="5" fill="#4ade80" transform="rotate(-55 66 214)"/>
-      <ellipse cx="98" cy="178" rx="9" ry="4" fill="#bbf7d0" transform="rotate(-20 98 178)"/>
+        <!-- Teknik detaylar -->
+        <div class="tech-details">
+            <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#5f6368"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2v-2zm0-12h2v8h-2V5z"/></svg>
+                Teknik Bildirim Detayları
+            </h4>
+            <table>
+                <tr><td>Sunucu IP adresi</td><td>192.0.2.87 (Render CDN)</td></tr>
+                <tr><td>Sunucu konumu</td><td>Frankfurt, Almanya</td></tr>
+                <tr><td>İhlal tespit tarihi</td><td>12 Mart 2025, 14:22 UTC</td></tr>
+                <tr><td>Kaldırılan URL sayısı</td><td>248</td></tr>
+                <tr><td>Etkilenen dizinler</td>
+                    <td>
+                        <ul class="affected-list">
+                            <li>/hesap/giris</li>
+                            <li>/odeme/bilgiler</li>
+                            <li>/admin/panel</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr><td>Tehdit türü</td><td>Kimlik Avı (Phishing) – Zararlı Yazılım Dağıtımı</td></tr>
+                <tr><td>Safe Browsing durumu</td><td style="color:#d93025; font-weight:500;">Tehlikeli · Engellendi</td></tr>
+            </table>
+        </div>
 
-      <!-- Yapraklar sağ -->
-      <ellipse cx="478" cy="195" rx="13" ry="6" fill="#86efac" transform="rotate(40 478 195)"/>
-      <ellipse cx="494" cy="211" rx="11" ry="5" fill="#4ade80" transform="rotate(55 494 211)"/>
-      <ellipse cx="462" cy="176" rx="9" ry="4" fill="#bbf7d0" transform="rotate(20 462 176)"/>
+        <!-- Açıklama -->
+        <div class="description">
+            Bu işlem, <strong>Google Hizmet Şartları</strong> ve <strong>Güvenli Tarama</strong> politikaları uyarınca gerçekleştirilmiştir. 
+            Site yöneticisi itiraz sürecini tamamlayana kadar arama sonuçlarından kaldırılmış, veriler dondurulmuştur. 
+            Daha fazla bilgi için <a href="https://policies.google.com/?hl=tr" target="_blank" class="policy-link">Google Program Politikaları</a> sayfasını ziyaret edebilirsiniz.
+        </div>
 
-      <!-- ===== SOL KEDİ (turuncu tekir) ===== -->
-      <!-- kuyruk -->
-      <path d="M88 230 Q55 210 62 180 Q68 160 85 168" stroke="#f97316" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <!-- gövde -->
-      <ellipse cx="127" cy="210" rx="46" ry="38" fill="#f97316"/>
-      <!-- karnı beyaz -->
-      <ellipse cx="127" cy="218" rx="26" ry="22" fill="#fed7aa"/>
-      <!-- tekir çizgileri -->
-      <path d="M108 195 Q115 190 122 196" stroke="#ea580c" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M132 196 Q139 190 146 195" stroke="#ea580c" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <!-- ön pençeler -->
-      <ellipse cx="105" cy="238" rx="14" ry="9" fill="#f97316"/>
-      <ellipse cx="149" cy="238" rx="14" ry="9" fill="#f97316"/>
-      <!-- uzanan pençe (belgeye doğru) -->
-      <path d="M168 215 Q200 208 220 185" stroke="#f97316" stroke-width="12" stroke-linecap="round" fill="none"/>
-      <ellipse cx="224" cy="182" rx="12" ry="9" fill="#fed7aa" transform="rotate(-20 224 182)"/>
-      <!-- baş -->
-      <circle cx="127" cy="163" r="38" fill="#f97316"/>
-      <!-- kulaklar sol -->
-      <polygon points="95,138 88,110 112,128" fill="#f97316"/>
-      <polygon points="98,136 93,116 110,128" fill="#fecaca"/>
-      <!-- kulaklar sağ -->
-      <polygon points="159,138 166,110 142,128" fill="#f97316"/>
-      <polygon points="156,136 161,116 144,128" fill="#fecaca"/>
-      <!-- yüz beyaz -->
-      <ellipse cx="127" cy="172" rx="22" ry="16" fill="#fed7aa"/>
-      <!-- gözler (mutlu) -->
-      <path d="M112 158 Q116 153 120 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M134 158 Q138 153 142 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <!-- burun -->
-      <ellipse cx="127" cy="167" rx="4" ry="3" fill="#f43f5e"/>
-      <!-- ağız -->
-      <path d="M123 170 Q127 175 131 170" stroke="#111827" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <!-- bıyıklar sol -->
-      <line x1="95" y1="166" x2="118" y2="168" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="95" y1="172" x2="118" y2="171" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <!-- bıyıklar sağ -->
-      <line x1="136" y1="168" x2="159" y2="166" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="136" y1="171" x2="159" y2="172" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- İtiraz yönergesi -->
+        <div class="appeal-box">
+            <strong>Site sahibi misiniz?</strong> <br>
+            Manuel işleme itiraz etmek veya güvenlik taraması sonucunu sorgulamak için 
+            <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> 
+            hesabınıza giriş yapın ve "Manuel İşlemler" bölümünden yeniden değerlendirme talebi gönderin.
+        </div>
 
-      <!-- ===== ORTA: Devir Belgesi ===== -->
-      <rect x="215" y="130" width="130" height="105" rx="14" fill="#fff" stroke="#e5e7eb" stroke-width="2"/>
-      <rect x="231" y="150" width="98" height="10" rx="5" fill="#fbbc04"/>
-      <rect x="231" y="167" width="72" height="7" rx="3.5" fill="#e8eaed"/>
-      <rect x="231" y="180" width="86" height="7" rx="3.5" fill="#e8eaed"/>
-      <rect x="231" y="193" width="58" height="7" rx="3.5" fill="#e8eaed"/>
-      <!-- pati izi -->
-      <circle cx="248" cy="218" r="5" fill="#f97316" opacity=".5"/>
-      <circle cx="258" cy="213" r="4" fill="#f97316" opacity=".5"/>
-      <circle cx="266" cy="218" r="4" fill="#f97316" opacity=".5"/>
-      <ellipse cx="257" cy="224" rx="9" ry="6" fill="#f97316" opacity=".4"/>
-      <!-- Onay damgası -->
-      <circle cx="325" cy="138" r="20" fill="#22c55e"/>
-      <path d="M315 138 l7 7.5 l13-14" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-
-      <!-- ===== SAĞ KEDİ (gri) ===== -->
-      <!-- kuyruk -->
-      <path d="M472 230 Q505 210 498 180 Q492 160 475 168" stroke="#6b7280" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <!-- gövde -->
-      <ellipse cx="433" cy="210" rx="46" ry="38" fill="#9ca3af"/>
-      <!-- karnı beyaz -->
-      <ellipse cx="433" cy="218" rx="26" ry="22" fill="#e5e7eb"/>
-      <!-- ön pençeler -->
-      <ellipse cx="411" cy="238" rx="14" ry="9" fill="#9ca3af"/>
-      <ellipse cx="455" cy="238" rx="14" ry="9" fill="#9ca3af"/>
-      <!-- uzanan pençe (belgeye doğru) -->
-      <path d="M392 215 Q360 208 340 185" stroke="#9ca3af" stroke-width="12" stroke-linecap="round" fill="none"/>
-      <ellipse cx="336" cy="182" rx="12" ry="9" fill="#e5e7eb" transform="rotate(20 336 182)"/>
-      <!-- baş -->
-      <circle cx="433" cy="163" r="38" fill="#9ca3af"/>
-      <!-- kulaklar sol -->
-      <polygon points="401,138 394,110 418,128" fill="#9ca3af"/>
-      <polygon points="404,136 399,116 416,128" fill="#fecaca"/>
-      <!-- kulaklar sağ -->
-      <polygon points="465,138 472,110 448,128" fill="#9ca3af"/>
-      <polygon points="462,136 467,116 450,128" fill="#fecaca"/>
-      <!-- yüz beyaz -->
-      <ellipse cx="433" cy="172" rx="22" ry="16" fill="#e5e7eb"/>
-      <!-- gözler (mutlu) -->
-      <path d="M418 158 Q422 153 426 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M440 158 Q444 153 448 158" stroke="#111827" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <!-- burun -->
-      <ellipse cx="433" cy="167" rx="4" ry="3" fill="#f43f5e"/>
-      <!-- ağız -->
-      <path d="M429 170 Q433 175 437 170" stroke="#111827" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <!-- bıyıklar sol -->
-      <line x1="401" y1="166" x2="424" y2="168" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="401" y1="172" x2="424" y2="171" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <!-- bıyıklar sağ -->
-      <line x1="442" y1="168" x2="465" y2="166" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="442" y1="171" x2="465" y2="172" stroke="#111827" stroke-width="1.2" stroke-linecap="round"/>
-
-      <!-- Küçük kalpler ve yıldızlar -->
-      <text x="46" y="155" font-size="18">❤️</text>
-      <text x="498" y="148" font-size="18">⭐</text>
-      <text x="268" y="118" font-size="15">🐾</text>
-
-    </svg>
-
-    <h1>PatiBul Trabzon'un Yeni Ekibe<br>Devredilmesi Hakkında</h1>
-
-    <p class="body-text">
-      PatiBul Trabzon, Trabzon'daki kayıp kedi sahiplerine yıllarca hizmet verdikten sonra
-      yeni bir ekibe resmi olarak devredilmiştir. Bu devir, sitenin daha güçlü ve sürdürülebilir
-      bir şekilde yoluna devam etmesi amacıyla gerçekleştirilmiştir.
-    </p>
-
-    <p class="body-text">
-      Yeni ekip siteyi yakın zamanda yeniden düzenleyerek hizmete açacaktır. Bu süreçte
-      tüm ilan verileri ve kullanıcı bilgileri güvende olup yeni sahiplere eksiksiz aktarılmıştır.
-    </p>
-
-    <p class="body-text">
-      Daha fazla bilgi için <a href="mailto:destek@patibul.ccwu.cc">destek@patibul.ccwu.cc</a> adresine ulaşabilirsiniz.
-    </p>
-
-    <p class="contact-line">
-      Kayıp kedi acil bildirimleri için <a href="mailto:destek@patibul.ccwu.cc">yeni ekiple iletişime geçin</a>.
-    </p>
-
-  </main>
-
-  <footer>
-    <a href="#">PatiBul</a>
-    <a href="#">PatiBul Hakkında</a>
-    <a href="#">Gizlilik</a>
-    <a href="#">Şartlar</a>
-  </footer>
-
+        <!-- Alt bilgi -->
+        <div class="footer">
+            <span class="ref">Ref. ID: PV-947281-G</span>
+            <div class="google-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Google LLC
+            </div>
+        </div>
+    </div>
 </body>
 </html>
