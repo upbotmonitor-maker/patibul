@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Google • Güvenlik Uyarısı</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatiBul – Hizmet Durduruldu</title>
     <style>
         * {
             margin: 0;
@@ -12,436 +12,261 @@
         }
 
         body {
-            background-color: #f8f9fa;
-            font-family: 'Google Sans', Roboto, Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Segoe UI', 'Google Sans', 'Roboto', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Google Translate bandı */
-        .translate-bar {
-            width: 100%;
-            background: #fff;
-            border-bottom: 1px solid #dadce0;
-            padding: 0.6rem 1.5rem;
-            font-size: 0.82rem;
-            color: #5f6368;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-            text-align: center;
-            flex-wrap: wrap;
-        }
-        .translate-bar svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-
-        /* Safe Browsing kırmızı banner */
-        .safebrowsing-banner {
-            width: 100%;
-            background: #d93025;
-            color: #fff;
-            padding: 0.7rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-align: center;
-            flex-wrap: wrap;
-        }
-        .safebrowsing-banner svg {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            fill: #fff;
+            background: radial-gradient(circle at 30% 30%, #fef9f0, #f3e8da);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px;
         }
 
-        /* Ana içerik kartı */
-        .warning-card {
-            background: #ffffff;
-            max-width: 720px;
+        /* Dekoratif arka plan pati izleri */
+        body::before {
+            content: "";
+            position: absolute;
             width: 100%;
-            margin: 1.5rem;
-            border-radius: 28px;
-            padding: 2.8rem 2.2rem 2.5rem;
-            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
-            text-align: left;
-            animation: fadeIn 0.3s ease-out;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.08"><path d="M60 40a12 12 0 1 1-4 8 12 12 0 0 1 4-8m-30 38a8 8 0 1 0 0 16 8 8 0 0 0 0-16m25 20a8 8 0 1 0 0 16 8 8 0 0 0 0-16m-30 45a15 15 0 1 1 3 10 15 15 0 0 1-3-10m15-5a8 8 0 1 0 0 16 8 8 0 0 0 0-16m25 5a8 8 0 1 0 0 16 8 8 0 0 0 0-16" fill="%238b6b4a"/></svg>');
+            background-repeat: repeat;
+            background-size: 180px 180px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 50px 45px;
+            max-width: 680px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08), 0 10px 30px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .header {
-            display: flex;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo-area {
+            margin-bottom: 35px;
+        }
+
+        .pati-logo {
+            display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.8rem;
-        }
-        .google-icon {
-            width: 32px;
-            height: 32px;
-            flex-shrink: 0;
-        }
-        .header-text {
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #202124;
-            letter-spacing: -0.2px;
-        }
-        .header-text strong {
-            font-weight: 500;
-            color: #ea4335;
+            justify-content: center;
+            gap: 8px;
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #4a3724;
+            background: linear-gradient(135deg, #e6b17e, #b8875a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
         }
 
-        /* Uyarı kutusu */
-        .alert-box {
-            background: #fce8e6;
-            border-left: 6px solid #ea4335;
-            border-radius: 12px;
-            padding: 1.3rem 1.5rem;
-            margin: 1.5rem 0 1.8rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        .alert-icon {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-        }
-        .alert-content h2 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #c5221f;
-            margin: 0 0 0.35rem;
-            line-height: 1.3;
-        }
-        .alert-content p {
-            font-size: 0.95rem;
-            color: #5f6368;
-            line-height: 1.5;
-            margin: 0.45rem 0 0;
-        }
-        .alert-content strong {
-            color: #202124;
-            font-weight: 500;
-        }
-
-        /* Manuel İşlem kutusu */
-        .manual-action {
-            background: #fff8e1;
-            border: 1px solid #f9ab00;
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
-            margin: 1.5rem 0;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-        .manual-action svg {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            fill: #f9ab00;
-        }
-        .manual-action div h3 {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #e37400;
-            margin: 0 0 0.25rem;
-        }
-        .manual-action div p {
-            font-size: 0.9rem;
-            color: #3c4043;
-            margin: 0.2rem 0;
-            line-height: 1.5;
-        }
-        .tag {
+        .pati-icon {
+            font-size: 48px;
             display: inline-block;
-            background: #fce8e6;
-            color: #c5221f;
-            font-weight: 600;
-            font-size: 0.78rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 16px;
-            margin-right: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
+            filter: drop-shadow(0 4px 8px rgba(160, 100, 40, 0.3));
+            -webkit-text-fill-color: initial;
+            color: #b8875a;
         }
 
-        /* URL çubuğu */
-        .url-bar {
-            background: #f1f3f4;
-            border-radius: 24px;
-            padding: 0.75rem 1.2rem;
-            margin: 1.5rem 0;
-            font-family: 'Google Sans Mono', 'Courier New', monospace;
-            font-size: 0.95rem;
-            color: #5f6368;
-            word-break: break-all;
+        .domain {
+            font-size: 18px;
+            color: #7a6a5c;
+            font-weight: 400;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
+
+        .warning-badge {
+            width: 90px;
+            height: 90px;
+            background: #dc3545;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            border: 1px solid #dadce0;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 46px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 12px 28px rgba(220, 53, 69, 0.35);
+            position: relative;
         }
-        .url-bar .lock {
-            color: #ea4335;
+
+        .warning-badge::after {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px dashed rgba(220, 53, 69, 0.25);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 30px;
             font-weight: 600;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-        .url-bar .site-name {
-            color: #ea4335;
-            font-weight: 600;
-            text-decoration: line-through;
-        }
-        .url-bar .suffix {
-            color: #80868b;
+            line-height: 1.3;
+            color: #2c2416;
+            margin-bottom: 18px;
         }
 
-        /* Teknik detaylar tablosu */
-        .tech-details {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 1.3rem 1.5rem;
-            margin: 1.8rem 0;
-            font-size: 0.88rem;
-            color: #3c4043;
-            border: 1px solid #e8eaed;
-        }
-        .tech-details h4 {
-            font-weight: 500;
-            margin: 0 0 0.8rem;
-            color: #202124;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .tech-details table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .tech-details td {
-            padding: 0.45rem 0.2rem;
-            vertical-align: top;
-        }
-        .tech-details td:first-child {
-            font-weight: 500;
-            color: #5f6368;
-            white-space: nowrap;
-            padding-right: 1rem;
-            width: 40%;
+        h1 .highlight {
+            color: #dc3545;
+            font-weight: 700;
+            background: linear-gradient(to right, #dc3545, #c62828);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .affected-list {
-            list-style: none;
-            margin: 0.5rem 0 0;
-            padding: 0;
-        }
-        .affected-list li {
-            font-family: monospace;
-            color: #d93025;
-            margin: 0.2rem 0;
-            text-decoration: line-through;
+        .divider {
+            width: 70px;
+            height: 3px;
+            background: #e0d3c3;
+            margin: 25px auto;
+            border-radius: 2px;
         }
 
-        .description {
-            color: #3c4043;
-            font-size: 0.95rem;
+        .message {
+            font-size: 18px;
+            color: #5f5346;
             line-height: 1.7;
-            margin: 1.8rem 0 0.8rem;
-        }
-        .description .policy-link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .description .policy-link:hover {
-            text-decoration: underline;
+            margin-bottom: 30px;
+            font-weight: 400;
         }
 
-        /* İtiraz yönergesi */
-        .appeal-box {
-            background: #e8f0fe;
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
-            margin: 1.5rem 0;
-            font-size: 0.92rem;
-            color: #174ea6;
-            line-height: 1.5;
-            border-left: 5px solid #1a73e8;
-        }
-        .appeal-box a {
-            color: #1a73e8;
-            font-weight: 500;
+        .message strong {
+            color: #3b2e20;
+            font-weight: 600;
         }
 
-        .footer {
-            margin-top: 2.2rem;
-            padding-top: 1.4rem;
-            border-top: 1px solid #e8eaed;
+        .info-box {
+            background: rgba(255, 243, 205, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 22px 28px;
+            text-align: left;
+            font-size: 15px;
+            color: #5c4b32;
+            border: 1px solid rgba(230, 180, 80, 0.5);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-box .label {
+            font-weight: 700;
+            color: #b45309;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #b0a090;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            font-size: 0.82rem;
-            color: #5f6368;
-        }
-        .footer .ref {
-            font-family: 'Google Sans Mono', monospace;
-            background: #f8f9fa;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            color: #3c4043;
-            font-weight: 500;
-        }
-        .google-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #5f6368;
-            font-size: 0.82rem;
         }
 
-        @media (max-width: 600px) {
-            .warning-card {
-                padding: 2rem 1.5rem;
-                border-radius: 20px;
-                margin: 0.8rem;
-            }
-            .alert-box, .manual-action {
-                flex-direction: column;
-                gap: 0.6rem;
-                padding: 1.2rem;
-            }
-            .tech-details td:first-child {
-                white-space: normal;
-            }
+        .footer-note span {
+            font-weight: 600;
+            color: #8b7355;
         }
+
+        .paw-decor {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .paw-decor.top-left { top: 15px; left: 20px; transform: rotate(-15deg); }
+        .paw-decor.bottom-right { bottom: 15px; right: 20px; transform: rotate(25deg); }
     </style>
 </head>
 <body>
-    <!-- Google Translate bandı -->
-    <div class="translate-bar">
-        <svg viewBox="0 0 24 24" fill="#5f6368"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-        <span>Google Translate tarafından otomatik çevrilmiştir · <a href="#" style="color:#1a73e8; text-decoration:none;">Orijinalini göster</a></span>
-    </div>
+    <div class="card">
+        <!-- Köşe pati süslemeleri -->
+        <div class="paw-decor top-left">🐾</div>
+        <div class="paw-decor bottom-right">🐾</div>
 
-    <!-- Safe Browsing kırmızı bandı -->
-    <div class="safebrowsing-banner">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm-1 8h2v5h-2v-5zm1 8.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-        <span>Google Güvenli Tarama: Aldatıcı site uyarısı · Tehdit türü: Kimlik Avı / Zararlı Yazılım</span>
-    </div>
-
-    <!-- Ana uyarı kartı -->
-    <div class="warning-card">
-        <div class="header">
-            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            <span class="header-text"><strong>Google</strong> Güvenlik Merkezi</span>
-        </div>
-
-        <!-- Ana uyarı -->
-        <div class="alert-box">
-            <svg class="alert-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 22h20L12 2z" fill="#EA4335" stroke="#C5221F" stroke-width="1.5" stroke-linejoin="round"/>
-                <path d="M12 10v4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="12" cy="17" r="1.5" fill="#fff"/>
-            </svg>
-            <div class="alert-content">
-                <h2>Bu site Google tarafından kapatılmıştır</h2>
-                <p><strong>PatiYuva</strong> projesi, Google politikalarını ciddi şekilde ihlal ettiği gerekçesiyle kalıcı olarak askıya alınmış ve tüm hizmetlerine erişim engellenmiştir.</p>
+        <!-- Logo bölümü -->
+        <div class="logo-area">
+            <div class="pati-logo">
+                <span class="pati-icon">🐾</span> PatiBul
             </div>
+            <div class="domain">PatiBul.onrender.com</div>
         </div>
 
-        <!-- Manuel İşlem kutusu -->
-        <div class="manual-action">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12zm-9-2h2v2h-2v-2zm0-8h2v6h-2V6z"/></svg>
-            <div>
-                <h3>Manuel İşlem (Search Console)</h3>
-                <p><span class="tag">Aldatıcı içerik</span> <span class="tag">Kimlik avı</span></p>
-                <p>Bu site Google Search Console tarafından manuel işleme tabi tutulmuş ve Google arama sonuçlarından tamamen kaldırılmıştır.</p>
-            </div>
-        </div>
+        <!-- Kırmızı uyarı rozeti -->
+        <div class="warning-badge">!</div>
 
-        <!-- URL çubuğu -->
-        <div class="url-bar">
-            <span class="lock">&#x1f512;</span>
-            <span class="site-name">patibul.onrender.com</span>
-            <span class="suffix">• bağlantı reddedildi</span>
-        </div>
+        <!-- Başlık -->
+        <h1>
+            <span class="highlight">Google & ToBig</span><br>
+            bu siteyi kalıcı olarak kapatmıştır
+        </h1>
 
-        <!-- Teknik detaylar -->
-        <div class="tech-details">
-            <h4>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#5f6368"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2v-2zm0-12h2v8h-2V5z"/></svg>
-                Teknik Bildirim Detayları
-            </h4>
-            <table>
-                <tr><td>Sunucu IP adresi</td><td>192.0.2.87 (Render CDN)</td></tr>
-                <tr><td>Sunucu konumu</td><td>Frankfurt, Almanya</td></tr>
-                <tr><td>İhlal tespit tarihi</td><td>12 Mart 2025, 14:22 UTC</td></tr>
-                <tr><td>Kaldırılan URL sayısı</td><td>248</td></tr>
-                <tr><td>Etkilenen dizinler</td>
-                    <td>
-                        <ul class="affected-list">
-                            <li>/hesap/giris</li>
-                            <li>/odeme/bilgiler</li>
-                            <li>/admin/panel</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr><td>Tehdit türü</td><td>Kimlik Avı (Phishing) – Zararlı Yazılım Dağıtımı</td></tr>
-                <tr><td>Safe Browsing durumu</td><td style="color:#d93025; font-weight:500;">Tehlikeli · Engellendi</td></tr>
-            </table>
-        </div>
+        <div class="divider"></div>
 
         <!-- Açıklama -->
-        <div class="description">
-            Bu işlem, <strong>Google Hizmet Şartları</strong> ve <strong>Güvenli Tarama</strong> politikaları uyarınca gerçekleştirilmiştir. 
-            Site yöneticisi itiraz sürecini tamamlayana kadar arama sonuçlarından kaldırılmış, veriler dondurulmuştur. 
-            Daha fazla bilgi için <a href="https://policies.google.com/?hl=tr" target="_blank" class="policy-link">Google Program Politikaları</a> sayfasını ziyaret edebilirsiniz.
-        </div>
+        <p class="message">
+            <strong>PatiBul</strong> platformu, <strong>Google</strong> ve <strong>ToBig</strong>
+            iş birliğiyle yürütülen değerlendirme sonucunda <strong>kalıcı olarak</strong>
+            erişime kapatılmıştır. Bu alan adı üzerinden sunulan tüm hizmetler
+            durdurulmuş olup, içeriklere yeniden ulaşılması mümkün değildir.
+        </p>
 
-        <!-- İtiraz yönergesi -->
-        <div class="appeal-box">
-            <strong>Site sahibi misiniz?</strong> <br>
-            Manuel işleme itiraz etmek veya güvenlik taraması sonucunu sorgulamak için 
-            <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a> 
-            hesabınıza giriş yapın ve "Manuel İşlemler" bölümünden yeniden değerlendirme talebi gönderin.
+        <!-- Ek bilgi kutusu -->
+        <div class="info-box">
+            <span class="label">ⓘ PatiBul kullanıcıları için</span>
+            Bu karar nihai olup, herhangi bir itiraz mekanizması bulunmamaktadır.
+            Konuya dair resmî açıklamalara Google Şeffaflık Raporu ve ToBig duyuru
+            sayfalarından erişebilirsiniz. Destek için <strong>resmî kanalları</strong> kullanınız.
         </div>
 
         <!-- Alt bilgi -->
-        <div class="footer">
-            <span class="ref">Ref. ID: PV-947281-G</span>
-            <div class="google-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                </svg>
-                Google LLC
-            </div>
+        <div class="footer-note">
+            <span>Google LLC</span> & <span>ToBig</span> · Karar No: PTB-2026/042 · Tarih: Mayıs 2026
         </div>
     </div>
 </body>
