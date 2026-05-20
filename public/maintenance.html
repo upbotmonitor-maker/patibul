@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PatiBul – Hizmet Durduruldu</title>
+    <title>Erişim Engellendi | PatiBul</title>
     <style>
         * {
             margin: 0;
@@ -12,262 +12,362 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Google Sans', 'Roboto', system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6f9;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 30% 30%, #fef9f0, #f3e8da);
-            background-attachment: fixed;
-            position: relative;
-            overflow-x: hidden;
+            min-height: 100vh;
             padding: 20px;
-        }
-
-        /* Dekoratif arka plan pati izleri */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.08"><path d="M60 40a12 12 0 1 1-4 8 12 12 0 0 1 4-8m-30 38a8 8 0 1 0 0 16 8 8 0 0 0 0-16m25 20a8 8 0 1 0 0 16 8 8 0 0 0 0-16m-30 45a15 15 0 1 1 3 10 15 15 0 0 1-3-10m15-5a8 8 0 1 0 0 16 8 8 0 0 0 0-16m25 5a8 8 0 1 0 0 16 8 8 0 0 0 0-16" fill="%238b6b4a"/></svg>');
-            background-repeat: repeat;
-            background-size: 180px 180px;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
+            color: #1e293b;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 40px;
-            padding: 50px 45px;
-            max-width: 680px;
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 560px;
             width: 100%;
+            padding: 40px 28px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08), 0 10px 30px rgba(0, 0, 0, 0.05),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.97);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .logo-area {
-            margin-bottom: 35px;
-        }
-
-        .pati-logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #4a3724;
-            background: linear-gradient(135deg, #e6b17e, #b8875a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 6px;
-        }
-
-        .pati-icon {
-            font-size: 48px;
-            display: inline-block;
-            filter: drop-shadow(0 4px 8px rgba(160, 100, 40, 0.3));
-            -webkit-text-fill-color: initial;
-            color: #b8875a;
-        }
-
-        .domain {
-            font-size: 18px;
-            color: #7a6a5c;
-            font-weight: 400;
-            margin-top: 4px;
-            letter-spacing: 0.3px;
-            opacity: 0.8;
-        }
-
-        .warning-badge {
-            width: 90px;
-            height: 90px;
-            background: #dc3545;
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background: #eff6ff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 46px;
-            color: white;
-            font-weight: 700;
-            box-shadow: 0 12px 28px rgba(220, 53, 69, 0.35);
-            position: relative;
+            margin: 0 auto 20px;
         }
 
-        .warning-badge::after {
-            content: "";
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 2px dashed rgba(220, 53, 69, 0.25);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .icon-circle svg {
+            width: 32px;
+            height: 32px;
+            stroke: #2563eb;
+            fill: none;
         }
 
         h1 {
-            font-size: 30px;
-            font-weight: 600;
-            line-height: 1.3;
-            color: #2c2416;
-            margin-bottom: 18px;
-        }
-
-        h1 .highlight {
-            color: #dc3545;
+            font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(to right, #dc3545, #c62828);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .divider {
-            width: 70px;
-            height: 3px;
-            background: #e0d3c3;
-            margin: 25px auto;
-            border-radius: 2px;
-        }
-
-        .message {
-            font-size: 18px;
-            color: #5f5346;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-        .message strong {
-            color: #3b2e20;
-            font-weight: 600;
-        }
-
-        .info-box {
-            background: rgba(255, 243, 205, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 22px 28px;
-            text-align: left;
-            font-size: 15px;
-            color: #5c4b32;
-            border: 1px solid rgba(230, 180, 80, 0.5);
-            margin-bottom: 15px;
-            line-height: 1.6;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-
-        .info-box .label {
-            font-weight: 700;
-            color: #b45309;
-            display: block;
+            color: #0f172a;
             margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 500;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 28px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1.5px solid #cbd5e1;
+            color: #334155;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
         }
 
         .footer-note {
-            margin-top: 30px;
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 460px;
+            width: 90%;
+            padding: 32px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            position: relative;
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-content h2 svg {
+            width: 22px;
+            height: 22px;
+            stroke: #2563eb;
+            fill: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #94a3b8;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #0f172a;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #334155;
             font-size: 14px;
-            color: #b0a090;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
 
-        .footer-note span {
-            font-weight: 600;
-            color: #8b7355;
+        .submit-btn:hover {
+            background: #1d4ed8;
         }
 
-        .paw-decor {
-            position: absolute;
-            font-size: 30px;
-            opacity: 0.15;
-            pointer-events: none;
+        .success-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            border-radius: 12px;
+            font-weight: 500;
         }
-
-        .paw-decor.top-left { top: 15px; left: 20px; transform: rotate(-15deg); }
-        .paw-decor.bottom-right { bottom: 15px; right: 20px; transform: rotate(25deg); }
     </style>
 </head>
 <body>
     <div class="card">
-        <!-- Köşe pati süslemeleri -->
-        <div class="paw-decor top-left">🐾</div>
-        <div class="paw-decor bottom-right">🐾</div>
-
-        <!-- Logo bölümü -->
-        <div class="logo-area">
-            <div class="pati-logo">
-                <span class="pati-icon">🐾</span> PatiBul
-            </div>
-            <div class="domain">PatiBul.onrender.com</div>
+        <div class="icon-circle">
+            <!-- Kilit İkonu (SVG) -->
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                <circle cx="12" cy="16" r="1"></circle>
+            </svg>
         </div>
 
-        <!-- Kırmızı uyarı rozeti -->
-        <div class="warning-badge">!</div>
-
-        <!-- Başlık -->
-        <h1>
-            <span class="highlight">Google & ToBig</span><br>
-            bu siteyi kalıcı olarak kapatmıştır
-        </h1>
-
-        <div class="divider"></div>
-
-        <!-- Açıklama -->
-        <p class="message">
-            <strong>PatiBul</strong> platformu, <strong>Google</strong> ve <strong>ToBig</strong>
-            iş birliğiyle yürütülen değerlendirme sonucunda <strong>kalıcı olarak</strong>
-            erişime kapatılmıştır. Bu alan adı üzerinden sunulan tüm hizmetler
-            durdurulmuş olup, içeriklere yeniden ulaşılması mümkün değildir.
+        <h1>Site Erişime Kapatıldı</h1>
+        <p class="subtitle">
+            <strong>PatiBul.onrender.com</strong> adresine erişim,<br>
+            <span class="highlight">ToBig & Google LLC</span> tarafından alınan kararla engellenmiştir.
         </p>
-
-        <!-- Ek bilgi kutusu -->
-        <div class="info-box">
-            <span class="label">ⓘ PatiBul kullanıcıları için</span>
-            Bu karar nihai olup, herhangi bir itiraz mekanizması bulunmamaktadır.
-            Konuya dair resmî açıklamalara Google Şeffaflık Raporu ve ToBig duyuru
-            sayfalarından erişebilirsiniz. Destek için <strong>resmî kanalları</strong> kullanınız.
+        <div class="info-badge">
+            Bu engelleme site yöneticisi tarafından yapılmamıştır.
         </div>
 
-        <!-- Alt bilgi -->
-        <div class="footer-note">
-            <span>Google LLC</span> & <span>ToBig</span> · Karar No: PTB-2026/042 · Tarih: Mayıs 2026
+        <div class="button-group">
+            <button class="btn btn-primary" id="appealBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                İtiraz Et
+            </button>
+            <button class="btn btn-outline" id="supportBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Destek Al
+            </button>
+        </div>
+        <p class="footer-note">
+            &copy; 2026 PatiBul. Tüm hakları saklıdır.
+        </p>
+    </div>
+
+    <!-- Modal (İtiraz / Destek) -->
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Sorununuzu Açıklayın
+            </h2>
+            <p style="color: #475569; margin-bottom: 20px; font-size: 14px;">
+                Erişim engeli ile ilgili itiraz veya destek talebinizi iletebilirsiniz.
+            </p>
+
+            <form id="appealForm">
+                <div class="form-group">
+                    <label>Adınız Soyadınız</label>
+                    <input type="text" placeholder="Ad Soyad" required>
+                </div>
+                <div class="form-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" placeholder="ornek@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Açıklamanız</label>
+                    <textarea placeholder="Siteye neden erişmek istediğinizi veya engelle ilgili detayları yazın..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Gönder
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                Talebiniz başarıyla alındı. En kısa sürede dönüş yapacağız.
+            </div>
         </div>
     </div>
+
+    <script>
+        const modal = document.getElementById('helpModal');
+        const appealBtn = document.getElementById('appealBtn');
+        const supportBtn = document.getElementById('supportBtn');
+        const closeModal = document.getElementById('closeModal');
+        const form = document.getElementById('appealForm');
+        const successMsg = document.getElementById('successMessage');
+
+        function openModal() {
+            modal.classList.add('active');
+            successMsg.style.display = 'none';
+            form.style.display = 'block';
+            form.reset();
+        }
+
+        appealBtn.addEventListener('click', openModal);
+        supportBtn.addEventListener('click', openModal);
+
+        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.remove('active');
+                form.style.display = 'block';
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+    </script>
 </body>
 </html>
