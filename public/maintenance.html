@@ -5,90 +5,390 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erişim Engellendi | PatiBul</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; color: #1e293b; }
-        .card { background: #ffffff; border-radius: 20px; max-width: 560px; width: 100%; padding: 40px 28px; text-align: center; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
-        .icon-circle { width: 64px; height: 64px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-        .icon-circle svg { width: 32px; height: 32px; stroke: #2563eb; fill: none; }
-        h1 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-        .subtitle { font-size: 16px; color: #475569; margin-bottom: 20px; line-height: 1.5; }
-        .highlight { font-weight: 600; color: #2563eb; }
-        .info-badge { display: inline-block; background: #f1f5f9; color: #334155; font-weight: 500; font-size: 13px; padding: 6px 18px; border-radius: 50px; margin-bottom: 28px; border: 1px solid #cbd5e1; }
-        .button-group { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 16px; }
-        .btn { border: none; padding: 12px 24px; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: inherit; }
-        .btn-primary { background: #2563eb; color: white; }
-        .btn-primary:hover { background: #1d4ed8; }
-        .btn-outline { background: white; border: 1.5px solid #cbd5e1; color: #334155; }
-        .btn-outline:hover { background: #f8fafc; }
-        .footer-note { font-size: 13px; color: #64748b; margin-top: 20px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; }
-        .modal.active { display: flex; }
-        .modal-content { background: white; max-width: 460px; width: 90%; padding: 32px 24px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); position: relative; text-align: left; }
-        .close-btn { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 28px; color: #94a3b8; cursor: pointer; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; font-weight: 500; margin-bottom: 6px; color: #334155; font-size: 14px; }
-        input, textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; background: #f8fafc; }
-        .submit-btn { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; }
-        .success-message { display: none; margin-top: 16px; padding: 12px; background: #f0fdf4; border: 1px solid #86efac; color: #166534; border-radius: 12px; text-align: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #1e293b;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 560px;
+            width: 100%;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background: #eff6ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .icon-circle svg {
+            width: 32px;
+            height: 32px;
+            stroke: #2563eb;
+            fill: none;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 28px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1.5px solid #cbd5e1;
+            color: #334155;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .footer-note {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 460px;
+            width: 90%;
+            padding: 32px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            position: relative;
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-content h2 svg {
+            width: 22px;
+            height: 22px;
+            stroke: #2563eb;
+            fill: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px; right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #94a3b8;
+            cursor: pointer;
+            line-height: 1;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #0f172a;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            border-radius: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="icon-circle">
-            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path><circle cx="12" cy="16" r="1"></circle></svg>
+            <!-- Kilit İkonu (SVG) -->
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                <circle cx="12" cy="16" r="1"></circle>
+            </svg>
         </div>
+
         <h1>Site Erişime Kapatıldı</h1>
-        <p class="subtitle"><strong>PatiBul.onrender.com</strong> adresine erişim,<br> engellenmiştir.</p>
-        <div class="info-badge">Bu engelleme site yöneticisi tarafından yapılmamıştır.</div>
-        <div class="button-group">
-            <button class="btn btn-primary" id="appealBtn">İtiraz Et</button>
-            <button class="btn btn-outline" id="supportBtn">Destek Al</button>
+        <p class="subtitle">
+            <strong>PatiBul.onrender.com</strong> adresine erişim,<br>
+            <span class="highlight">ToBig & Google LLC</span> tarafından alınan kararla engellenmiştir.
+        </p>
+        <div class="info-badge">
+            Bu engelleme site yöneticisi tarafından yapılmamıştır.
         </div>
-        <p class="footer-note">&copy; 2026 PatiBul. Tüm hakları saklıdır.</p>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="appealBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                İtiraz Et
+            </button>
+            <button class="btn btn-outline" id="supportBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Destek Al
+            </button>
+        </div>
+        <p class="footer-note">
+            &copy; 2026 PatiBul. Tüm hakları saklıdır.
+        </p>
     </div>
 
+    <!-- Modal (İtiraz / Destek) -->
     <div class="modal" id="helpModal">
         <div class="modal-content">
             <button class="close-btn" id="closeModal">&times;</button>
-            <h2>Sorununuzu Açıklayın</h2>
+            <h2>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Sorununuzu Açıklayın
+            </h2>
+            <p style="color: #475569; margin-bottom: 20px; font-size: 14px;">
+                Erişim engeli ile ilgili itiraz veya destek talebinizi iletebilirsiniz.
+            </p>
+
             <form id="appealForm">
-                <div class="form-group"><label>Adınız Soyadınız</label><input type="text" id="isim" required></div>
-                <div class="form-group"><label>E-posta Adresiniz</label><input type="email" id="mail" required></div>
-                <div class="form-group"><label>Açıklamanız</label><textarea id="detay" required></textarea></div>
-                <button type="submit" class="submit-btn">Gönder</button>
+                <div class="form-group">
+                    <label>Adınız Soyadınız</label>
+                    <input type="text" id="isimInput" placeholder="Ad Soyad" required>
+                </div>
+                <div class="form-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" id="mailInput" placeholder="ornek@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Açıklamanız</label>
+                    <textarea id="detayInput" placeholder="Siteye neden erişmek istediğinizi veya engelle ilgili detayları yazın..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Gönder
+                </button>
             </form>
-            <div class="success-message" id="successMessage">Talebiniz başarıyla alındı.</div>
+
+            <div class="success-message" id="successMessage">
+                Talebiniz başarıyla alındı. En kısa sürede dönüş yapacağız.
+            </div>
         </div>
     </div>
 
     <script>
         const modal = document.getElementById('helpModal');
+        const appealBtn = document.getElementById('appealBtn');
+        const supportBtn = document.getElementById('supportBtn');
+        const closeModal = document.getElementById('closeModal');
         const form = document.getElementById('appealForm');
         const successMsg = document.getElementById('successMessage');
 
-        document.getElementById('appealBtn').onclick = () => modal.classList.add('active');
-        document.getElementById('supportBtn').onclick = () => modal.classList.add('active');
-        document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
+        // Modalı açma fonksiyonu
+        function openModal() {
+            modal.classList.add('active');
+            successMsg.style.display = 'none';
+            form.style.display = 'block';
+            form.reset();
+        }
 
+        appealBtn.addEventListener('click', openModal);
+        supportBtn.addEventListener('click', openModal);
+
+        // Modalı kapatma fonksiyonları
+        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Formu Gönderme İşlemi
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Sayfanın yenilenmesini durdurur
+
+            // ID'leri eklediğimiz inputlardan değerleri al
             const data = {
-                mail: document.getElementById('mail').value,
-                konu: "Destek/İtiraz: " + document.getElementById('isim').value,
-                detay: document.getElementById('detay').value
+                mail: document.getElementById('mailInput').value,
+                konu: document.getElementById('isimInput').value,
+                detay: document.getElementById('detayInput').value
             };
 
-            const res = await fetch('/destek-talebi', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
+            try {
+                // Server.js deki /destek-talebi rotasına POST isteği at
+                const res = await fetch('/destek-talebi', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
 
-            if (res.ok) {
-                form.style.display = 'none';
-                successMsg.style.display = 'block';
-            } else {
-                alert("Bir hata oluştu.");
+                if (res.ok) {
+                    // İşlem başarılıysa formu gizle, mesajı göster
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                } else {
+                    alert("Sistemsel bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
+                }
+            } catch (err) {
+                alert("Bağlantı hatası: Sunucuya ulaşılamıyor.");
             }
         });
     </script>
