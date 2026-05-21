@@ -9,13 +9,25 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Bakım Modu Ayarı
+const MAINTENANCE = true; 
+
+app.use((req, res, next) => {
+    // Bakım modundayken sadece destek talebi rotasına ve public dosyalara izin ver
+    if (MAINTENANCE && req.path !== '/destek-talebi' && !req.path.startsWith('/public')) {
+        return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
+    }
+    next();
+});
+
 app.use(express.static('public'));
 
+// Destek Talebi Rotası
 app.post('/destek-talebi', async (req, res) => {
     const { mail, konu, detay } = req.body;
 
     try {
-        // 1. KULLANICIYA GİDECEK ONAY MAİLİ (Mavi Tikli ve Şık)
+        // 1. Kullanıcıya Gidecek Şık Onay Maili
         await resend.emails.send({
             from: 'PatiBul Destek <onboarding@resend.dev>',
             to: [mail],
@@ -33,11 +45,11 @@ app.post('/destek-talebi', async (req, res) => {
                 </div>`
         });
 
-        // 2. SANA GİDECEK YÖNETİCİ BİLDİRİMİ (Şirket Formatı)
+        // 2. Sana Gidecek Şirket Görünümlü Bildirim
         await resend.emails.send({
             from: 'Sistem Bildirimi <onboarding@resend.dev>',
-            to: ['iobrowser.iletisim@gmail.com'], // Kendi mailini buraya yaz
-            subject: 'YENİ TALEBİ: ' + konu,
+            to: ['patibultrabzon@gmail.com'], // KENDİ MAİLİNİ BURAYA YAZ
+            subject: 'YENİ DESTEK TALEBİ: ' + konu,
             html: `
                 <div style="font-family: sans-serif; max-width: 500px; border: 1px solid #334155; border-radius: 12px; overflow: hidden;">
                     <div style="background: #1e293b; color: white; padding: 15px;">
