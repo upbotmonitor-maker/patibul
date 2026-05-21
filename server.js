@@ -28,7 +28,7 @@ app.post('/destek-talebi', async (req, res) => {
     try {
         await resend.emails.send({
             from: 'onboarding@resend.dev', 
-            to: ['seninmailin@gmail.com'], // Buraya kendi mailini yaz
+            to: ['patibultrabzon@gmail.com'], // Buraya kendi mailini yaz
             subject: 'YENİ DESTEK TALEBİ: ' + konu,
             html: `
                 <h3>Yeni Talep Geldi</h3>
