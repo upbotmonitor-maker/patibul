@@ -1,3 +1,6 @@
+// .env dosyasındaki değişkenleri yükler (GMAIL_USER, GMAIL_APP_PASSWORD)
+require('dotenv').config();
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
@@ -5,20 +8,17 @@ const app = express();
 
 const PORT = process.env.PORT || 10000;
 
-// Önce gelen verileri okuma ayarları
+// Gelen verileri okuma ayarları
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 🔥 BAKIM MODU SİSTEMİ (Kritik: express.static kodundan kesinlikle ÖNCE olmalı!)
-const MAINTENANCE = true; // Sitenin açılmasını istediğinde bunu false yaparsın
+// 🔥 BAKIM MODU SİSTEMİ
+const MAINTENANCE = true; // false yapınca site normal açılır
 app.use((req, res, next) => {
     if (MAINTENANCE) {
-        // 1. Eğer kullanıcı formu gönderiyorsa, engelleme geçsin
         if (req.path === '/destek-talebi') {
             return next();
         }
-        
-        // 2. Ana sayfaya (/) girmeye çalışan veya sonu .html ile biten herkesi bakım sayfasına fırlat
         if (req.path === '/' || req.path.endsWith('.html')) {
             return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
         }
@@ -26,25 +26,53 @@ app.use((req, res, next) => {
     next();
 });
 
-// Sitenin diğer statik dosyaları (CSS, JS, Resimler) bakım sayfasında düzgün yüklensin diye alta aldık
+// Statik dosyalar (CSS, JS, resimler)
 app.use(express.static('public'));
 
-// Nodemailer SMTP Ayarları (Kendi Gmail hesabın üzerinden)
+// --------------------------------------------------------------
+// NODEMAILER SMTP AYARLARI (Gmail için kararlı port 587 + TLS)
+// --------------------------------------------------------------
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, 
+    port: 587,                 // 465 yerine 587 (daha az engellenir)
+    secure: false,             // 587 için false
+    requireTLS: true,          // TLS zorunlu
     auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD
+    },
+    connectionTimeout: 15000,  // 15 saniye timeout
+    greetingTimeout: 15000,
+    socketTimeout: 30000,
+    tls: {
+        rejectUnauthorized: true   // üretimde true bırak (güvenlik)
+    },
+    debug: true,               // SMTP konuşmasını loglar (sorun çözülünce kaldır)
+    logger: true               // Detaylı loglar
+});
+
+// Bağlantıyı başlangıçta test et (opsiyonel ama faydalı)
+transporter.verify((error, success) => {
+    if (error) {
+        console.error('❌ SMTP bağlantı hatası (Gmail):', error);
+    } else {
+        console.log('✅ SMTP bağlantısı başarılı, mail gönderilebilir.');
     }
 });
 
+// --------------------------------------------------------------
+// DESTEK TALEBİ ENDPOINT'i
+// --------------------------------------------------------------
 app.post('/destek-talebi', async (req, res) => {
     const { mail, konu, detay } = req.body;
 
+    // Basit validasyon
+    if (!mail || !konu || !detay) {
+        return res.status(400).json({ hata: 'Eksik alanlar var (mail, konu, detay).' });
+    }
+
     try {
-        // 1. Kullanıcıye Giden Onay Maili
+        // 1. Kullanıcıya onay maili
         await transporter.sendMail({
             from: `"PatiBul Destek" <${process.env.GMAIL_USER}>`,
             to: mail,
@@ -52,7 +80,7 @@ app.post('/destek-talebi', async (req, res) => {
             html: `
                 <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
                     <h2 style="color: #2563eb;">🐾 PatiBul</h2>
-                    <p>Merhaba, expedited talebiniz başarıyla bize ulaştı!</p>
+                    <p>Merhaba, talebiniz başarıyla bize ulaştı!</p>
                     <div style="background: #eff6ff; padding: 15px; border-radius: 8px;">
                         <strong>✅ Talebiniz inceleniyor.</strong>
                     </div>
@@ -60,7 +88,7 @@ app.post('/destek-talebi', async (req, res) => {
                 </div>`
         });
 
-        // 2. Sana Gelen Bildirim
+        // 2. Size bildirim maili
         await transporter.sendMail({
             from: `"Sistem Bildirimi" <${process.env.GMAIL_USER}>`,
             to: process.env.GMAIL_USER,
@@ -71,7 +99,7 @@ app.post('/destek-talebi', async (req, res) => {
                     <p><b>Konu:</b> ${konu}</p>
                     <p><b>E-posta:</b> ${mail}</p>
                     <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb;">
-                        <b>Detay:</b><br>${detay}
+                        <b>Detay:</b><br>${detay.replace(/\n/g, '<br>')}
                     </div>
                 </div>`
         });
@@ -83,4 +111,5 @@ app.post('/destek-talebi', async (req, res) => {
     }
 });
 
+// Sunucuyu başlat
 app.listen(PORT, '0.0.0.0', () => console.log(`Sunucu ${PORT} portunda çalışıyor.`));
