@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Bakım Modu
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 app.use((req, res, next) => {
     if (MAINTENANCE && req.path !== '/destek-talebi' && !req.path.startsWith('/public')) {
         return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
