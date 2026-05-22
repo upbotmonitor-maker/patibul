@@ -9,9 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// Bakım Modu
-const MAINTENANCE = false;
+// Bakım Modu Sistemi
+const MAINTENANCE = true; // Bunu false yaparsan site normale döner
 app.use((req, res, next) => {
+    // Site bakımdayken ve istek destek talebi veya css/js değilse maintenance.html göster
     if (MAINTENANCE && req.path !== '/destek-talebi' && !req.path.startsWith('/public')) {
         return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
     }
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, // 465 portu için true
+    secure: true, 
     auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD
@@ -52,12 +53,12 @@ app.post('/destek-talebi', async (req, res) => {
         // 2. Sana Gelen Bildirim
         await transporter.sendMail({
             from: `"Sistem Bildirimi" <${process.env.GMAIL_USER}>`,
-            to: process.env.GMAIL_USER,
+            to: process.env.GMAIL_USER, // Bildirim kendi mailine gelsin
             subject: 'YENİ DESTEK TALEBİ: ' + konu,
             html: `
                 <div style="font-family: sans-serif; border: 1px solid #334155; padding: 20px;">
                     <h2 style="color: #1e293b;">Yeni Talep Geldi!</h2>
-                    <p><b>Gönderen:</b> ${konu}</p>
+                    <p><b>Konu:</b> ${konu}</p>
                     <p><b>E-posta:</b> ${mail}</p>
                     <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb;">
                         <b>Detay:</b><br>${detay}
