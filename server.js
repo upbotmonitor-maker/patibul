@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 🔥 BAKIM MODU AÇIK (true)
-const MAINTENANCE = true;  // false yaparsan site normal açılır
+const MAINTENANCE = false;  // false yaparsan site normal açılır
 
 app.use((req, res, next) => {
     if (MAINTENANCE) {
