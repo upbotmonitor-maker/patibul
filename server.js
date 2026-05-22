@@ -1,6 +1,3 @@
-// .env dosyasındaki değişkenleri yükler (GMAIL_USER, GMAIL_APP_PASSWORD)
-require('dotenv').config();
-
 const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
@@ -8,17 +5,19 @@ const app = express();
 
 const PORT = process.env.PORT || 10000;
 
-// Gelen verileri okuma ayarları
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 🔥 BAKIM MODU SİSTEMİ
-const MAINTENANCE = true; // false yapınca site normal açılır
+// 🔥 BAKIM MODU AÇIK (true)
+const MAINTENANCE = true;  // false yaparsan site normal açılır
+
 app.use((req, res, next) => {
     if (MAINTENANCE) {
+        // Destek talebi endpoint'ine izin ver
         if (req.path === '/destek-talebi') {
             return next();
         }
+        // Diğer tüm sayfaları (ana sayfa ve .html uzantılılar) bakım sayfasına yönlendir
         if (req.path === '/' || req.path.endsWith('.html')) {
             return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
         }
@@ -26,32 +25,24 @@ app.use((req, res, next) => {
     next();
 });
 
-// Statik dosyalar (CSS, JS, resimler)
 app.use(express.static('public'));
 
-// --------------------------------------------------------------
-// NODEMAILER SMTP AYARLARI (Gmail için kararlı port 587 + TLS)
-// --------------------------------------------------------------
+// NODEMAILER - Gmail SMTP (port 587 + TLS, timeout değerleri arttırıldı)
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,                 // 465 yerine 587 (daha az engellenir)
-    secure: false,             // 587 için false
-    requireTLS: true,          // TLS zorunlu
+    port: 587,
+    secure: false,
+    requireTLS: true,
     auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD
     },
-    connectionTimeout: 15000,  // 15 saniye timeout
-    greetingTimeout: 15000,
-    socketTimeout: 30000,
-    tls: {
-        rejectUnauthorized: true   // üretimde true bırak (güvenlik)
-    },
-    debug: true,               // SMTP konuşmasını loglar (sorun çözülünce kaldır)
-    logger: true               // Detaylı loglar
+    connectionTimeout: 20000,  // 20 saniye
+    greetingTimeout: 20000,
+    socketTimeout: 30000
 });
 
-// Bağlantıyı başlangıçta test et (opsiyonel ama faydalı)
+// Bağlantıyı test et
 transporter.verify((error, success) => {
     if (error) {
         console.error('❌ SMTP bağlantı hatası (Gmail):', error);
@@ -60,13 +51,9 @@ transporter.verify((error, success) => {
     }
 });
 
-// --------------------------------------------------------------
-// DESTEK TALEBİ ENDPOINT'i
-// --------------------------------------------------------------
 app.post('/destek-talebi', async (req, res) => {
     const { mail, konu, detay } = req.body;
 
-    // Basit validasyon
     if (!mail || !konu || !detay) {
         return res.status(400).json({ hata: 'Eksik alanlar var (mail, konu, detay).' });
     }
@@ -111,5 +98,4 @@ app.post('/destek-talebi', async (req, res) => {
     }
 });
 
-// Sunucuyu başlat
 app.listen(PORT, '0.0.0.0', () => console.log(`Sunucu ${PORT} portunda çalışıyor.`));
