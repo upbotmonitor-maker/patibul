@@ -5,19 +5,29 @@ const app = express();
 
 const PORT = process.env.PORT || 10000;
 
+// Önce gelen verileri okuma ayarları
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
 
-// Bakım Modu Sistemi
-const MAINTENANCE = true; // Bunu false yaparsan site normale döner
+// 🔥 BAKIM MODU SİSTEMİ (Kritik: express.static kodundan kesinlikle ÖNCE olmalı!)
+const MAINTENANCE = true; // Sitenin açılmasını istediğinde bunu false yaparsın
 app.use((req, res, next) => {
-    // Site bakımdayken ve istek destek talebi veya css/js değilse maintenance.html göster
-    if (MAINTENANCE && req.path !== '/destek-talebi' && !req.path.startsWith('/public')) {
-        return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
+    if (MAINTENANCE) {
+        // 1. Eğer kullanıcı formu gönderiyorsa, engelleme geçsin
+        if (req.path === '/destek-talebi') {
+            return next();
+        }
+        
+        // 2. Ana sayfaya (/) girmeye çalışan veya sonu .html ile biten herkesi bakım sayfasına fırlat
+        if (req.path === '/' || req.path.endsWith('.html')) {
+            return res.sendFile(path.join(__dirname, 'public', 'maintenance.html'));
+        }
     }
     next();
 });
+
+// Sitenin diğer statik dosyaları (CSS, JS, Resimler) bakım sayfasında düzgün yüklensin diye alta aldık
+app.use(express.static('public'));
 
 // Nodemailer SMTP Ayarları (Kendi Gmail hesabın üzerinden)
 const transporter = nodemailer.createTransport({
@@ -34,7 +44,7 @@ app.post('/destek-talebi', async (req, res) => {
     const { mail, konu, detay } = req.body;
 
     try {
-        // 1. Kullanıcıya Giden Onay Maili
+        // 1. Kullanıcıye Giden Onay Maili
         await transporter.sendMail({
             from: `"PatiBul Destek" <${process.env.GMAIL_USER}>`,
             to: mail,
@@ -42,7 +52,7 @@ app.post('/destek-talebi', async (req, res) => {
             html: `
                 <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 10px;">
                     <h2 style="color: #2563eb;">🐾 PatiBul</h2>
-                    <p>Merhaba, talebiniz başarıyla bize ulaştı!</p>
+                    <p>Merhaba, expedited talebiniz başarıyla bize ulaştı!</p>
                     <div style="background: #eff6ff; padding: 15px; border-radius: 8px;">
                         <strong>✅ Talebiniz inceleniyor.</strong>
                     </div>
@@ -53,7 +63,7 @@ app.post('/destek-talebi', async (req, res) => {
         // 2. Sana Gelen Bildirim
         await transporter.sendMail({
             from: `"Sistem Bildirimi" <${process.env.GMAIL_USER}>`,
-            to: process.env.GMAIL_USER, // Bildirim kendi mailine gelsin
+            to: process.env.GMAIL_USER,
             subject: 'YENİ DESTEK TALEBİ: ' + konu,
             html: `
                 <div style="font-family: sans-serif; border: 1px solid #334155; padding: 20px;">
