@@ -3,204 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erişim Engellendi | PatiBul</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; color: #1e293b; }
-        .card { background: #ffffff; border-radius: 20px; max-width: 560px; width: 100%; padding: 40px 28px; text-align: center; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08); border: 1px solid #e2e8f0; }
-        .icon-circle { width: 64px; height: 64px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-        .icon-circle svg { width: 32px; height: 32px; stroke: #2563eb; fill: none; }
-        h1 { font-size: 24px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-        .subtitle { font-size: 16px; color: #475569; margin-bottom: 20px; line-height: 1.5; }
-        .highlight { font-weight: 600; color: #2563eb; }
-        .info-badge { display: inline-block; background: #f1f5f9; color: #334155; font-weight: 500; font-size: 13px; padding: 6px 18px; border-radius: 50px; margin-bottom: 28px; border: 1px solid #cbd5e1; }
-        .button-group { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 16px; }
-        .btn { border: none; padding: 12px 24px; border-radius: 14px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: inherit; }
-        .btn-primary { background: #2563eb; color: white; }
-        .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
-        .btn-outline { background: white; border: 1.5px solid #cbd5e1; color: #334155; }
-        .btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
-        .footer-note { font-size: 13px; color: #64748b; margin-top: 20px; }
-        
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; }
-        .modal.active { display: flex; }
-        .modal-content { background: white; max-width: 460px; width: 90%; padding: 32px 24px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); position: relative; text-align: left; }
-        .modal-content h2 { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .modal-content h2 svg { width: 22px; height: 22px; stroke: #2563eb; fill: none; }
-        .close-btn { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 28px; color: #94a3b8; cursor: pointer; line-height: 1; transition: 0.2s; }
-        .close-btn:hover { color: #0f172a; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; font-weight: 500; margin-bottom: 6px; color: #334155; font-size: 14px; }
-        input, textarea { width: 100%; padding: 12px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: inherit; outline: none; transition: 0.2s; background: #f8fafc; color: #0f172a; }
-        input:focus, textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        textarea { min-height: 100px; resize: vertical; }
-        .submit-btn { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; font-size: 16px; font-weight: 700; border-radius: 14px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .submit-btn:hover { background: #1d4ed8; }
-        .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+    <title>Sistem Bakımda - PatiBul</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Yeni Başarı Ekranı Tasarımı */
-        .success-message { display: none; text-align: center; padding: 20px 0; }
-        .success-icon-container { width: 72px; height: 72px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-        .success-icon-container svg { width: 36px; height: 36px; stroke: #166534; fill: none; }
-        .success-message h3 { color: #166534; font-size: 22px; margin-bottom: 8px; font-weight: 700; }
-        .success-message p { color: #475569; font-size: 15px; line-height: 1.5; }
-        
-        /* Hata Mesajı */
-        .error-msg { display: none; color: #dc2626; font-size: 14px; margin-top: 10px; text-align: center; font-weight: 500; }
+    <style>
+        /* Genel Ayarlar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #334155;
+        }
+
+        /* Kart Tasarımı */
+        .maintenance-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        /* Başlık ve İkon */
+        .header-icon {
+            font-size: 50px;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p.desc {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Form Elemanları */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .input-group label i {
+            margin-right: 5px;
+            color: #3b82f6;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input,
+        .input-wrapper textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e293b;
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper textarea:focus {
+            border-color: #3b82f6;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Gönder Butonu */
+        button {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* Bildirim Alanı */
+        #mesajAlani {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px;
+            border-radius: 8px;
+            display: none; /* Başlangıçta gizli */
+        }
+
+        .basarili {
+            background-color: #dcfce7;
+            color: #166534;
+            display: block !important;
+        }
+
+        .hata {
+            background-color: #fee2e2;
+            color: #991b1b;
+            display: block !important;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="icon-circle">
-            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                <circle cx="12" cy="16" r="1"></circle>
-            </svg>
-        </div>
 
-        <h1>Site Erişime Kapatıldı</h1>
-        <p class="subtitle">
-            <strong>PatiBul.onrender.com</strong> adresine erişim,<br>
-            <span class="highlight">ToBig & Google LLC</span> tarafından alınan kararla engellenmiştir.
+    <div class="maintenance-card">
+        <i class="fa-solid fa-server header-icon"></i>
+        <h1>Sistem Bakımda</h1>
+        <p class="desc">
+            Sizlere daha iyi hizmet verebilmek için altyapımızı güncelliyoruz. 
+            Bu süreçte bizimle iletişime geçmek isterseniz aşağıdaki formu kullanabilirsiniz.
         </p>
-        <div class="info-badge">
-            Bu engelleme site yöneticisi tarafından yapılmamıştır.
-        </div>
-
-        <div class="button-group">
-            <button class="btn btn-primary" id="appealBtn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                İtiraz Et
-            </button>
-            <button class="btn btn-outline" id="supportBtn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                Destek Al
-            </button>
-        </div>
-        <p class="footer-note">
-            &copy; 2026 PatiBul. Tüm hakları saklıdır.
-        </p>
-    </div>
-
-    <!-- Modal (İtiraz / Destek) -->
-    <div class="modal" id="helpModal">
-        <div class="modal-content">
-            <button class="close-btn" id="closeModal">&times;</button>
-            
-            <div id="formContainer">
-                <h2>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
-                    Sorununuzu Açıklayın
-                </h2>
-                <p style="color: #475569; margin-bottom: 20px; font-size: 14px;">
-                    Erişim engeli ile ilgili itiraz veya destek talebinizi iletebilirsiniz.
-                </p>
-
-                <form id="appealForm">
-                    <div class="form-group">
-                        <label>Adınız Soyadınız</label>
-                        <input type="text" id="isimInput" placeholder="Örn: Emir Ali" required>
-                    </div>
-                    <div class="form-group">
-                        <label>E-posta Adresiniz</label>
-                        <input type="email" id="mailInput" placeholder="ornek@mail.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Açıklamanız</label>
-                        <textarea id="detayInput" placeholder="Siteye neden erişmek istediğinizi veya engelle ilgili detayları yazın..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        Gönder
-                    </button>
-                    <div class="error-msg" id="errorMsg">Sunucuya ulaşılamadı. Lütfen daha sonra tekrar deneyin.</div>
-                </form>
-            </div>
-
-            <!-- Yeni Görsel Başarı Ekranı -->
-            <div class="success-message" id="successMessage">
-                <div class="success-icon-container">
-                    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
+        
+        <form id="destekFormu">
+            <div class="input-group">
+                <label for="mail"><i class="fa-solid fa-envelope"></i> E-posta Adresiniz</label>
+                <div class="input-wrapper">
+                    <input type="email" id="mail" required placeholder="Size ulaşabileceğimiz bir adres girin...">
                 </div>
-                <h3>Başarılı!</h3>
-                <p>Talebiniz başarıyla alındı. Girdiğiniz e-posta adresi üzerinden en kısa sürede dönüş yapacağız.</p>
             </div>
 
-        </div>
+            <div class="input-group">
+                <label for="konu"><i class="fa-solid fa-heading"></i> Konu</label>
+                <div class="input-wrapper">
+                    <input type="text" id="konu" required placeholder="Mesajınızın konusu nedir?">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="detay"><i class="fa-solid fa-comment-dots"></i> Mesajınız</label>
+                <div class="input-wrapper">
+                    <textarea id="detay" rows="4" required placeholder="Lütfen detayları buraya yazın..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="gonderBtn">
+                <i class="fa-solid fa-paper-plane"></i> Mesajı Gönder
+            </button>
+
+            <div id="mesajAlani"></div>
+        </form>
     </div>
 
     <script>
-        const modal = document.getElementById('helpModal');
-        const formContainer = document.getElementById('formContainer');
-        const form = document.getElementById('appealForm');
-        const successMsg = document.getElementById('successMessage');
-        const errorMsg = document.getElementById('errorMsg');
-        const submitBtn = document.getElementById('submitBtn');
-
-        // Modalı açma fonksiyonu
-        function openModal() {
-            modal.classList.add('active');
-            successMsg.style.display = 'none';
-            formContainer.style.display = 'block';
-            errorMsg.style.display = 'none';
-            form.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Gönder';
-        }
-
-        document.getElementById('appealBtn').addEventListener('click', openModal);
-        document.getElementById('supportBtn').addEventListener('click', openModal);
-
-        // Modalı kapatma fonksiyonları
-        document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('active'));
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
-        });
-
-        // Formu Gönderme İşlemi
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-            errorMsg.style.display = 'none';
+        document.getElementById('destekFormu').addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            // Butonu gönderiliyor durumuna al
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Gönderiliyor...';
+            const btn = document.getElementById('gonderBtn');
+            const mesajAlani = document.getElementById('mesajAlani');
+            
+            const mail = document.getElementById('mail').value;
+            const konu = document.getElementById('konu').value;
+            const detay = document.getElementById('detay').value;
 
-            const data = {
-                mail: document.getElementById('mailInput').value,
-                konu: document.getElementById('isimInput').value,
-                detay: document.getElementById('detayInput').value
-            };
+            // Butonu yükleniyor durumuna al (İkonu değiştiriyoruz)
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Gönderiliyor...';
+            mesajAlani.className = '';
+            mesajAlani.style.display = 'none';
 
             try {
-                const res = await fetch('/destek-talebi', {
+                const response = await fetch('/destek-talebi', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify({ mail, konu, detay })
                 });
 
-                if (res.ok) {
-                    // İşlem başarılıysa formu gizle, başarı simgesini göster
-                    formContainer.style.display = 'none';
-                    successMsg.style.display = 'block';
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Başarılı durumu vektörel ikonla
+                    mesajAlani.className = 'basarili';
+                    mesajAlani.innerHTML = '<i class="fa-solid fa-circle-check"></i> Talebiniz başarıyla bize ulaştı!';
+                    document.getElementById('destekFormu').reset();
                 } else {
-                    // Sunucu hata verdiyse
-                    errorMsg.style.display = 'block';
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Tekrar Dene';
+                    // Hata durumu vektörel ikonla
+                    mesajAlani.className = 'hata';
+                    mesajAlani.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + (result.hata || "Bir sorun oluştu.");
                 }
-            } catch (err) {
-                // Bağlantı kopuksa (örneğin sunucu kapalıysa)
-                errorMsg.style.display = 'block';
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Tekrar Dene';
+            } catch (error) {
+                mesajAlani.className = 'hata';
+                mesajAlani.innerHTML = '<i class="fa-solid fa-plug-circle-xmark"></i> Sunucuya bağlanılamadı!';
+            } finally {
+                // İşlem bitince butonu eski haline getir
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Mesajı Gönder';
             }
         });
     </script>
